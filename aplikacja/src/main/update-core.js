@@ -90,16 +90,16 @@ function targetPath(root, relative) {
 }
 
 function createUpdater(options) {
-  const { root, fetchText, publicKey, manifestUrl, log = () => {} } = options;
+  const { root, fetchText, publicKey, manifestUrl, localVersion = null, log = () => {} } = options;
   const versionFile = path.join(root, '.update-version');
   const appliedFile = path.join(root, '.update-applied.json');
   const stagedDir = path.join(root, '.update-new');
 
   function installedVersion() {
     try {
-      return fs.readFileSync(versionFile, 'utf8').trim() || null;
+      return fs.readFileSync(versionFile, 'utf8').trim() || localVersion;
     } catch {
-      return null;
+      return localVersion;
     }
   }
 

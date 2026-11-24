@@ -184,6 +184,25 @@ test('klucz publiczny w formacie base64 jest akceptowany', async () => {
   }
 });
 
+test('wersja z update-trust jest punktem odniesienia przy pierwszym starcie', async () => {
+  const f = fixture();
+  try {
+    const signed = signedManifest([fileEntry('scripts/a.py', 'A1\n')]);
+    const updater = createUpdater({
+      root: f.root,
+      publicKey: signed.publicKey,
+      manifestUrl: MANIFEST_URL,
+      localVersion: '2026.11.24',
+      fetchText: async () => signed.text,
+    });
+    const check = await updater.check();
+    assert.equal(check.available, false);
+    assert.equal(check.installed, '2026.11.24');
+  } finally {
+    f.cleanup();
+  }
+});
+
 test('brak sieci daje unavailable zamiast wyjątku', async () => {
   const f = fixture();
   try {

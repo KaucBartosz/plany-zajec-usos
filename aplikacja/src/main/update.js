@@ -58,6 +58,7 @@ async function main() {
     fetchText,
     publicKey: trust.publicKey,
     manifestUrl: trust.manifestUrl,
+    localVersion: trust.version,
     log: (message) => console.log(message),
   });
 

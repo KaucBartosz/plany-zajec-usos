@@ -99,7 +99,7 @@ function main() {
     version: trust.version,
     publishedAt: new Date().toISOString(),
     minRuntime: trust.minRuntime,
-    base: trust.manifestUrl.replace(/[^/]+$/, ''),
+    base: trust.fileBaseUrl,
     files,
   };
   const sig = crypto.sign(null, Buffer.from(canonicalJson(unsigned), 'utf8'), privateKey)

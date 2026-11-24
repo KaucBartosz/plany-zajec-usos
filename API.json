@@ -1,13 +1,13 @@
 {
   "schema": 1,
-  "version": "2026.11.24",
-  "publishedAt": "2026-11-24T11:27:31.772Z",
+  "version": "2026.11.24-2",
+  "publishedAt": "2026-11-24T11:33:35.786Z",
   "minRuntime": {
     "python": "3.10",
     "node": "18",
     "electron": "37"
   },
-  "base": "https://raw.githubusercontent.com/KaucBartosz/plany-zajec-usos/v2026.11.24/",
+  "base": "https://raw.githubusercontent.com/KaucBartosz/plany-zajec-usos/v2026.11.24-2/",
   "files": [
     {
       "path": "aplikacja/package.json",
@@ -47,20 +47,20 @@
     },
     {
       "path": "aplikacja/src/main/update-core.js",
-      "sha256": "8fa8d359e9795312b7ceb44a2459825ef1fb3ef0058fb425afbc5c1cf34a93a7",
-      "bytes": 7896,
+      "sha256": "dab197a34c5aa817356e05140ae2ca9663a7f7990a24f9e7404d133063c220bc",
+      "bytes": 7933,
       "mode": "managed"
     },
     {
       "path": "aplikacja/src/main/update-trust.js",
-      "sha256": "0b6a7411acf70b6fedeb3103ed2511e69fe51ce72a090ac82aea6fd983aa9e5a",
-      "bytes": 459,
+      "sha256": "c28371b9f44ff7a10340c283d73c7488931c2f869a3cbfa51de6ced61beb084f",
+      "bytes": 692,
       "mode": "local"
     },
     {
       "path": "aplikacja/src/main/update.js",
-      "sha256": "a5c49bd00409f0090670331ae06ab515c82c7f822d805d7cc3b0cf5f3cc79920",
-      "bytes": 3338,
+      "sha256": "426461b3e98e72a36c091da3892ac4c31ef1c3ced3be7e68ee1a8077312dd8e8",
+      "bytes": 3371,
       "mode": "managed"
     },
     {
@@ -113,8 +113,8 @@
     },
     {
       "path": "aplikacja/test/update-core.test.js",
-      "sha256": "9ec3f78cbf8333d7e2875b10723db995fce958f1874c2c46d4f70e4398179100",
-      "bytes": 7554,
+      "sha256": "f07a24740f5b027b953100ccfe99fd101b2cefce4397352857023f1ab4020248",
+      "bytes": 8129,
       "mode": "managed"
     },
     {
@@ -221,8 +221,8 @@
     },
     {
       "path": "scripts/make_manifest.js",
-      "sha256": "158ff3809578935fd0ac1ccea0cf71fe0548ceb06e5cd5df2e84a44acf0af739",
-      "bytes": 3552,
+      "sha256": "3e3c609e8afcaa559d276b17adb96f74d95b43cd2594a5b760a9e64a84b62084",
+      "bytes": 3530,
       "mode": "managed"
     },
     {
@@ -310,5 +310,5 @@
       "mode": "local"
     }
   ],
-  "sig": "Khr58W/QaaBHQ1VsyqfDn3fcXY74bl8cZu/xKWibygWkMC/ekos9ChWwa0tecYFxItMl9MzTp6glHaT1iEHrDg=="
+  "sig": "oHz5zY+19OHS4wuq8BD3dblemFrJA+QmKu6ojssJuAT75RAlZ3I3OLHMn6MJlb3lq4gNDPTPjdL1kOVZY9TXCg=="
 }
