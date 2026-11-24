@@ -54,6 +54,24 @@ test('eksport grup rysuje równoległe zajęcia z separatorem |', () => {
   assert.ok(html.includes('Julia Banach'));
 });
 
+test('eksport grup pokazuje częstotliwość, uwagi i info według etykiet', () => {
+  const event = {
+    day: 'Sobota', start: '9:45', end: '12:00', course: 'Test', type: 'WYK',
+    event: 'każdy poniedziałek, 9:45 - 12:00', note: 'parz.',
+    info: 'WYK, gr. 1 (301, bud. 009)', teachers: ['Anna Nowak'],
+    locations: [{ room: '301, bud. 009', groups: ['1'] }],
+  };
+  const html = buildHtml({
+    view: 'groups',
+    visible: ['time', 'course', 'teacher', 'event', 'note', 'info'],
+    sections: [{ title: 'Grupa N-I', days: [{ day: 'Sobota', events: [[event]] }] }],
+  }, '');
+
+  assert.ok(html.includes('każdy poniedziałek, 9:45 - 12:00'));
+  assert.ok(html.includes('parz.'));
+  assert.ok(html.includes('WYK, gr. 1 (301, bud. 009)'));
+});
+
 test('zwykły (niescalony) wpis nadal działa', () => {
   const html = buildHtml({
     visible,

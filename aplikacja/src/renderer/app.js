@@ -16,7 +16,7 @@ const FIELD_LABELS = {
 // kolumny, tytuł karty albo treść pokazywana niezależnie od flagi.
 const VIEW_COLUMNS = {
   table: FIELD_KEYS,
-  groups: ['time', 'course', 'teacher', 'code', 'event', 'note'],
+  groups: ['time', 'course', 'teacher', 'code', 'event', 'note', 'info'],
   rooms: ['time', 'type', 'course', 'code', 'group', 'teacher', 'event', 'note'],
 };
 
@@ -307,8 +307,9 @@ function groupMetaHtml(event, yearGroupCount) {
   const parts = [groupAssignmentHtml(event, yearGroupCount)];
   if (event.tags && event.tags.length) parts.push(escapeHtml(event.tags.join(' · ')));
   if (state.visible.has('code') && event.code) parts.push(escapeHtml(event.code));
-  if (state.visible.has('event') && event.note) parts.push(escapeHtml(event.note));
-  if (state.visible.has('note') && event.info) parts.push(escapeHtml(event.info));
+  if (state.visible.has('event') && event.event) parts.push(escapeHtml(event.event));
+  if (state.visible.has('note') && event.note) parts.push(escapeHtml(event.note));
+  if (state.visible.has('info') && event.info) parts.push(escapeHtml(event.info));
   return parts.join(' · ');
 }
 

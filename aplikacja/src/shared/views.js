@@ -169,8 +169,8 @@
         consolidated.set(signature, {
           day: entry.day || '', start: entry.start || '', end: entry.end || '',
           course: entry.course || '', code: entry.code || '', type: entry.type || '',
-          note: entry.note || '', info: entry.info || '', teachers: [], locations: new Map(),
-          tags: [],
+          event: entry.event || '', note: entry.note || '', info: entry.info || '',
+          teachers: [], locations: new Map(), tags: [],
         });
       }
       const item = consolidated.get(signature);

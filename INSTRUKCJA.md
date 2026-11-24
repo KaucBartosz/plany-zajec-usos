@@ -477,6 +477,7 @@ są — skrypt nie jest częścią `run-all.cmd`, żeby nie przerywać wydruku.
 | wygląd kartki A4 | `scripts/build_sheets.py` | `CSS`, `SHEET_HEAD` |
 | jakość renderu | `scripts/shot_rooms.js`, `scripts/sheets.js` | `deviceScaleFactor` (3 = 3x) |
 | format PDF | `scripts/to_pdf.py` + `config.py` | `PDF_W`, `PDF_H`, `PDF_DPI` |
+| wydanie nowej wersji kodu | `scripts/release.js` | podbija wersję, odnawia `API.json`, sprawdza testy; `--apply` robi commit, push, tag i push tagu |
 | listę kroków pobierania i wydruków | `scripts/pipeline.json` | fazy `data` i `build`; `run-all.cmd` generuje `make_runall.js` |
 | listę plików aktualizowanych z GitHub | `scripts/make_manifest.js` | `MANAGED`, `LOCAL` (hash + podpis trafiają do `API.json`) |
 | adres repo i klucz publiczny | `aplikacja/src/main/update-trust.js` | `manifestUrl`, `publicKey` (klucz prywatny poza repo) |

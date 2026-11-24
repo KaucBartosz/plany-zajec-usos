@@ -5,6 +5,7 @@ const path = require('path');
 const { spawn } = require('child_process');
 const { app, BrowserWindow, ipcMain, shell } = require('electron');
 const { loadAll } = require('../shared/data');
+const { phaseStatusPatch } = require('../shared/status');
 const { exportPlan } = require('./export');
 
 // aplikacja/src/main -> trzy poziomy w górę = folder główny projektu (plan.json)
@@ -84,7 +85,7 @@ function phaseFinished(sender, code) {
   }
   if (phase.id === 'data') {
     const changes = fetchChanges();
-    writeStatus({ dataFetchedAt: new Date().toISOString(), changes });
+    writeStatus(phaseStatusPatch('data', changes, new Date().toISOString()));
     if (!changes.length) {
       sender.send('fetch:progress', {
         type: 'log', text: 'Brak nowych danych — wydruki nie zostały przebudowane.',
@@ -94,7 +95,7 @@ function phaseFinished(sender, code) {
       return;
     }
   } else if (phase.id === 'build') {
-    writeStatus({ buildFinishedAt: new Date().toISOString() });
+    writeStatus(phaseStatusPatch('build', [], new Date().toISOString()));
   }
   if (phaseIndex + 1 < activePhases.length) {
     phaseIndex++;

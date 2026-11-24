@@ -42,6 +42,20 @@ test('plan grupy łączy salę i grupy w jednym wpisie oraz zbiera prowadzących
   ]);
 });
 
+test('karta grupy przenosi częstotliwość, uwagi i info jako osobne pola', () => {
+  const groups = views.groupEntriesByGroup([
+    entry({
+      event: 'każdy poniedziałek, 9:45 - 12:00',
+      note: 'parz.',
+      info: 'WYK, gr. 1 (301, bud. 009)',
+    }),
+  ]);
+  const event = groups[0].days[0].rows[0][0];
+  assert.equal(event.event, 'każdy poniedziałek, 9:45 - 12:00');
+  assert.equal(event.note, 'parz.');
+  assert.equal(event.info, 'WYK, gr. 1 (301, bud. 009)');
+});
+
 test('zajęcia nachodzące na siebie trafiają do jednego wiersza równoległego', () => {
   const groups = views.groupEntriesByGroup([
     entry({ start: '9:45', end: '11:15', group: '1', course: 'Psychometria' }),

@@ -57,8 +57,9 @@ function eventHtml(entry, visible) {
 function groupExtra(event, visible) {
   const parts = [];
   if (visible.includes('code') && event.code) parts.push(esc(event.code));
-  if (visible.includes('event') && event.note) parts.push(esc(event.note));
-  if (visible.includes('note') && event.info) parts.push(esc(event.info));
+  if (visible.includes('event') && event.event) parts.push(esc(event.event));
+  if (visible.includes('note') && event.note) parts.push(esc(event.note));
+  if (visible.includes('info') && event.info) parts.push(esc(event.info));
   return parts.length ? ` · ${parts.join(' · ')}` : '';
 }
 

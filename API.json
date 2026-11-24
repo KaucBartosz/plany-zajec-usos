@@ -1,13 +1,13 @@
 {
   "schema": 1,
-  "version": "2026.11.24-5",
-  "publishedAt": "2026-11-24T12:40:05.968Z",
+  "version": "2026.11.24-6",
+  "publishedAt": "2026-11-24T12:49:24.770Z",
   "minRuntime": {
     "python": "3.10",
     "node": "18",
     "electron": "37"
   },
-  "base": "https://raw.githubusercontent.com/KaucBartosz/plany-zajec-usos/v2026.11.24-5/",
+  "base": "https://raw.githubusercontent.com/KaucBartosz/plany-zajec-usos/v2026.11.24-6/",
   "files": [
     {
       "path": "aplikacja/package.json",
@@ -29,8 +29,8 @@
     },
     {
       "path": "aplikacja/src/main/export-template.js",
-      "sha256": "2303021c16affa719a85c4b740e6b2de7ece5c703beba9f9bcf5f8a33d116be5",
-      "bytes": 7431,
+      "sha256": "926cc0747efef82b36228c752c18a007a369240fd8ed0bcba631605928c5b9d9",
+      "bytes": 7508,
       "mode": "managed"
     },
     {
@@ -41,8 +41,8 @@
     },
     {
       "path": "aplikacja/src/main/main.js",
-      "sha256": "216009e52ea84e58360daa6e1f41ee275ec7897720a39cb37691e0aae00380bc",
-      "bytes": 7314,
+      "sha256": "91b47e1640facf9f6c75be3529faae03bbd77be2de71799e567f43195dc52baa",
+      "bytes": 7389,
       "mode": "managed"
     },
     {
@@ -59,7 +59,7 @@
     },
     {
       "path": "aplikacja/src/main/update-trust.js",
-      "sha256": "aa551b822c9493636704ee17a76b8194c040c8538aab56d8860b85f3d505f933",
+      "sha256": "67645ede4e4798ca4fee4bcfdaf1ffed5664d027e34302c3ec1e002d4e88f9cd",
       "bytes": 694,
       "mode": "local"
     },
@@ -71,8 +71,8 @@
     },
     {
       "path": "aplikacja/src/renderer/app.js",
-      "sha256": "bd3609f6ebcb3fa2c03d3094f1aeac1eb8028701539b00a19293bedc60ca5f76",
-      "bytes": 33244,
+      "sha256": "5b039ac04f694cc53ae75ce0d3eec3e354c0535996c3bc8528647dd29443ca0a",
+      "bytes": 33337,
       "mode": "managed"
     },
     {
@@ -100,15 +100,21 @@
       "mode": "managed"
     },
     {
+      "path": "aplikacja/src/shared/status.js",
+      "sha256": "6dfd696b4b3bb0a4eb11f5d87f83be531f187801e3f604626750d697752e43e7",
+      "bytes": 468,
+      "mode": "managed"
+    },
+    {
       "path": "aplikacja/src/shared/views.js",
-      "sha256": "ac0132cf834d19d42966a1aaa1e6ef1926370dcf43355326d37dbd51f1dd2a11",
-      "bytes": 12708,
+      "sha256": "bf6423e65824434c8211a76427fb2bd7cfecc3d5de8360326acfa7d214fc5982",
+      "bytes": 12734,
       "mode": "managed"
     },
     {
       "path": "aplikacja/test/export-template.test.js",
-      "sha256": "c360420191e9d025116fc04305482bbc64b1c423f3d8fac3d1167e2ae679dfd3",
-      "bytes": 2887,
+      "sha256": "7bb6a8de28a6478f78943dadbf5f38b590016aff71f1ee50d5c965ac79c18da3",
+      "bytes": 3640,
       "mode": "managed"
     },
     {
@@ -124,6 +130,12 @@
       "mode": "managed"
     },
     {
+      "path": "aplikacja/test/status.test.js",
+      "sha256": "0d2fc0c9476198e2d21bf11ecc919e272c33eb867be421ca370b12265f6b2ec8",
+      "bytes": 766,
+      "mode": "managed"
+    },
+    {
       "path": "aplikacja/test/update-core.test.js",
       "sha256": "f07a24740f5b027b953100ccfe99fd101b2cefce4397352857023f1ab4020248",
       "bytes": 8129,
@@ -131,8 +143,8 @@
     },
     {
       "path": "aplikacja/test/views.test.js",
-      "sha256": "8795620767eedd3050e2490394b5dd168c185e72b4b709c5766dc53d646b7593",
-      "bytes": 7469,
+      "sha256": "3bb4b7e32f40e6116ef3a8dd928504d7f7c31f3a9c1382f270c59ca018a254d3",
+      "bytes": 7952,
       "mode": "managed"
     },
     {
@@ -155,8 +167,8 @@
     },
     {
       "path": "INSTRUKCJA.md",
-      "sha256": "2b01d1d47773bd947dff2f557149c32ec9f8445ceba0fff9083e959f329d894e",
-      "bytes": 24317,
+      "sha256": "7e304c44352adae45f8d687dac3339eea9551107c54a3823002cf5dc9d0f363d",
+      "bytes": 24470,
       "mode": "managed"
     },
     {
@@ -233,8 +245,8 @@
     },
     {
       "path": "scripts/make_manifest.js",
-      "sha256": "e4928377eb1374fab1884179de55e006ac70cb853d75166e49496924121ac54e",
-      "bytes": 3810,
+      "sha256": "503768e6dbc43e453d8a8b84ffd6a6a089dfc8844f4790de22cd64327915b022",
+      "bytes": 3905,
       "mode": "managed"
     },
     {
@@ -266,6 +278,12 @@
       "sha256": "c352f5a3394047e5c7a444c79aaa966583d71e30243fc481b06195795a1c1566",
       "bytes": 5151,
       "mode": "local"
+    },
+    {
+      "path": "scripts/release.js",
+      "sha256": "8ebc210e6016b3e1774b48c26e403d652aecf260ceaa0fdfadc57e71e554e77e",
+      "bytes": 3175,
+      "mode": "managed"
     },
     {
       "path": "scripts/sheets.js",
@@ -346,5 +364,5 @@
       "mode": "local"
     }
   ],
-  "sig": "X1Ki6wviND0QPsfaJ5/0F3M6Slm/2YOKNNwbKe/qCjldIdI855unrAQqybcauP3Opw1gESiLDrgWL1U41UaoAw=="
+  "sig": "06omj1162h3LwaXVJAQ9LH32CGTxbaXibMK+1hbF8Zgmteq+sD+Dx460qHqF9It23+bagrp2oJKREJDRYR10Bg=="
 }
