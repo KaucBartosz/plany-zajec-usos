@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Planer zajęć USOS</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Planer zajęć USOS</h1>
+      <p id="status" class="status" role="status" aria-live="polite">Ładowanie danych…</p>
+    </div>
+    <nav class="tabs">
+      <button type="button" data-tab="plan" class="active">Plan</button>
+      <button type="button" data-tab="fetch">Pobieranie danych</button>
+    </nav>
+    <button type="button" id="eksport" class="export-top">Eksport PDF/PNG</button>
+  </header>
+
+  <div id="page-plan" class="page active">
+    <div class="layout">
+      <aside id="filtry" class="sidebar"></aside>
+      <main>
+        <div class="toolbar">
+          <div class="view-switch">
+            <label><input type="radio" name="view" value="table"> Tabela</label>
+            <label><input type="radio" name="view" value="groups" checked> Karty grup</label>
+            <label><input type="radio" name="view" value="rooms"> Plansza sali</label>
+          </div>
+          <label><input type="checkbox" id="weekend-only"> tylko weekend</label>
+          <input type="search" id="query" name="query" autocomplete="off" placeholder="Szukaj: przedmiot, prowadzący, sala…">
+          <button type="button" id="odswiez">Odśwież dane</button>
+        </div>
+        <div id="wyniki"></div>
+      </main>
+    </div>
+  </div>
+
+  <div id="page-fetch" class="page">
+    <section class="fetch-panel">
+      <h2>Pobieranie danych z USOS</h2>
+      <p class="hint">Pełny przebieg: pobranie planów, parsowanie, plansze sal, PNG,
+        kartki A4 i PDF do druku, kontrola jakości. Wszystkie pliki w folderze
+        projektu zostaną odświeżone. Można zamknąć tę zakładkę w każdej chwili.</p>
+      <button type="button" id="start-fetch">Rozpocznij pobieranie</button>
+      <button type="button" id="stop-fetch" class="stop-fetch" disabled>Przerwij pobieranie</button>
+      <div id="progress-track" class="progress-track" role="progressbar" aria-label="Postęp pobierania" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="progress-bar" class="progress-bar"></div></div>
+      <p id="progress-label" class="progress-label" role="status" aria-live="polite">Nie rozpoczęto.</p>
+      <pre id="fetch-log" class="fetch-log"></pre>
+    </section>
+  </div>
+
+  <div id="eksport-modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="eksport-tytul">
+    <div class="modal-box">
+      <h2 id="eksport-tytul">Eksport planu</h2>
+      <p class="hint">Wybierz plany do eksportu i opcje wydruku.</p>
+      <div class="modal-row">
+        <button type="button" id="eksport-all">Zaznacz wszystkie</button>
+        <button type="button" id="eksport-none">Odznacz wszystkie</button>
+      </div>
+      <div id="eksport-list" class="export-list"></div>
+      <fieldset class="export-opts">
+        <legend>Format</legend>
+        <label><input type="radio" name="export-format" value="pdf" checked> PDF</label>
+        <label><input type="radio" name="export-format" value="png"> PNG</label>
+        <label><input type="radio" name="export-format" value="both"> PDF i PNG</label>
+      </fieldset>
+      <fieldset class="export-opts" id="eksport-pdf-opts">
+        <legend>Opcje PDF</legend>
+        <label><input type="checkbox" id="export-single-pdf" checked> wszystkie plany w jednym pliku PDF</label>
+        <label><input type="checkbox" id="export-pack"> więcej niż jeden plan na kartkę, jeśli pozwoli miejsce</label>
+      </fieldset>
+      <div class="modal-actions">
+        <button type="button" id="eksport-anuluj">Anuluj</button>
+        <button type="button" id="eksport-potwierdz">Eksportuj</button>
+      </div>
+      <p id="eksport-status" class="export-status" role="status" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <script src="../shared/filters.js"></script>
+  <script src="../shared/views.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

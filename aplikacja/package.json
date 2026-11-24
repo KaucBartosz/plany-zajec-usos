@@ -1,0 +1,14 @@
+{
+  "name": "planer-zajec-usos",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Aplikacja desktopowa (Electron) do filtrowania planów zajęć z USOS",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test test/*.test.js"
+  },
+  "devDependencies": {
+    "electron": "^37.0.0"
+  }
+}

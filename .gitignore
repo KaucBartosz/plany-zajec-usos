@@ -1,0 +1,23 @@
+# Dane i wyniki — nie publikujemy ich w repozytorium kodu
+html/
+out/
+plan.json
+
+# Bundle przenośny (duże binaria, specyficzne dla systemu)
+runtime/
+node_modules/
+aplikacja/node_modules/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Pliki robocze aktualizatora
+*.bak
+.update-new/
+.update-version
+.update-applied.json
+
+# Logi i tymczasowe podglądy
+*.log
+aplikacja/src/renderer/_podglad.html

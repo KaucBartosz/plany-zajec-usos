@@ -1,0 +1,314 @@
+{
+  "schema": 1,
+  "version": "2026.11.24",
+  "publishedAt": "2026-11-24T11:27:31.772Z",
+  "minRuntime": {
+    "python": "3.10",
+    "node": "18",
+    "electron": "37"
+  },
+  "base": "https://raw.githubusercontent.com/KaucBartosz/plany-zajec-usos/v2026.11.24/",
+  "files": [
+    {
+      "path": "aplikacja/package.json",
+      "sha256": "c30510d69d030646564ae1392d1567b2f2a92db7a2874d6182cf3c6b813cb4ab",
+      "bytes": 337,
+      "mode": "managed"
+    },
+    {
+      "path": "aplikacja/PLAN.md",
+      "sha256": "fe28c253a2b6f5cf8ad1f2627159f208006ea024c0024088e75f9403df263035",
+      "bytes": 10566,
+      "mode": "managed"
+    },
+    {
+      "path": "aplikacja/README.md",
+      "sha256": "522302d724b0931f42b1b06d62213d1cec33360dff741eccc1e4376835acb9ab",
+      "bytes": 5711,
+      "mode": "managed"
+    },
+    {
+      "path": "aplikacja/src/main/export-template.js",
+      "sha256": "2303021c16affa719a85c4b740e6b2de7ece5c703beba9f9bcf5f8a33d116be5",
+      "bytes": 7431,
+      "mode": "managed"
+    },
+    {
+      "path": "aplikacja/src/main/export.js",
+      "sha256": "eb1d93f5952ded57383e2260f33228fb5f59ca090da9354c51c6405cf3002537",
+      "bytes": 5170,
+      "mode": "managed"
+    },
+    {
+      "path": "aplikacja/src/main/main.js",
+      "sha256": "49925fa1f20f7e521da9151083f0c642309b66c9eba7f41715d370d26ef16c4b",
+      "bytes": 4984,
+      "mode": "managed"
+    },
+    {
+      "path": "aplikacja/src/main/update-core.js",
+      "sha256": "8fa8d359e9795312b7ceb44a2459825ef1fb3ef0058fb425afbc5c1cf34a93a7",
+      "bytes": 7896,
+      "mode": "managed"
+    },
+    {
+      "path": "aplikacja/src/main/update-trust.js",
+      "sha256": "0b6a7411acf70b6fedeb3103ed2511e69fe51ce72a090ac82aea6fd983aa9e5a",
+      "bytes": 459,
+      "mode": "local"
+    },
+    {
+      "path": "aplikacja/src/main/update.js",
+      "sha256": "a5c49bd00409f0090670331ae06ab515c82c7f822d805d7cc3b0cf5f3cc79920",
+      "bytes": 3338,
+      "mode": "managed"
+    },
+    {
+      "path": "aplikacja/src/renderer/app.js",
+      "sha256": "51bfc2f970c68c2e93107f5627d1907b1e3af578a8b1133864597e08e13c30c1",
+      "bytes": 31686,
+      "mode": "managed"
+    },
+    {
+      "path": "aplikacja/src/renderer/index.html",
+      "sha256": "de9407390f3230ca7a84c0c443f602df7cd29031ca739da4ec1ba6e2d7980b11",
+      "bytes": 4103,
+      "mode": "managed"
+    },
+    {
+      "path": "aplikacja/src/renderer/styles.css",
+      "sha256": "bfdba76848d81c25bc45dfd031e03554c2fd992e3436f59b29682bd2ae13db36",
+      "bytes": 10347,
+      "mode": "managed"
+    },
+    {
+      "path": "aplikacja/src/shared/data.js",
+      "sha256": "0ed764b480cbc6b329bec52700c9fd859430aa17ca462b8a49f86db57b8d3175",
+      "bytes": 2421,
+      "mode": "managed"
+    },
+    {
+      "path": "aplikacja/src/shared/filters.js",
+      "sha256": "6763ffa4b34f53c145fce6b7de7de1fefabbc7c27e2eaf14ec0504904565d4b7",
+      "bytes": 4893,
+      "mode": "managed"
+    },
+    {
+      "path": "aplikacja/src/shared/views.js",
+      "sha256": "ac0132cf834d19d42966a1aaa1e6ef1926370dcf43355326d37dbd51f1dd2a11",
+      "bytes": 12708,
+      "mode": "managed"
+    },
+    {
+      "path": "aplikacja/test/export-template.test.js",
+      "sha256": "c360420191e9d025116fc04305482bbc64b1c423f3d8fac3d1167e2ae679dfd3",
+      "bytes": 2887,
+      "mode": "managed"
+    },
+    {
+      "path": "aplikacja/test/filters.test.js",
+      "sha256": "6de3d8cac1f67c0f82460a0692113777f3acecd656392c3e05de9125a989a916",
+      "bytes": 4304,
+      "mode": "managed"
+    },
+    {
+      "path": "aplikacja/test/update-core.test.js",
+      "sha256": "9ec3f78cbf8333d7e2875b10723db995fce958f1874c2c46d4f70e4398179100",
+      "bytes": 7554,
+      "mode": "managed"
+    },
+    {
+      "path": "aplikacja/test/views.test.js",
+      "sha256": "8795620767eedd3050e2490394b5dd168c185e72b4b709c5766dc53d646b7593",
+      "bytes": 7469,
+      "mode": "managed"
+    },
+    {
+      "path": "check-changes.cmd",
+      "sha256": "6b4bb8d36f2a32d8e0ba9599f96498c17324ae36b81dc7f136eeda7e2b80915c",
+      "bytes": 496,
+      "mode": "managed"
+    },
+    {
+      "path": "drukuj-grupy-weekend.cmd",
+      "sha256": "c2ace5c7d86a24b7ad6b699cdd0302e96fff93e0f8d10e694c55568f1177725c",
+      "bytes": 593,
+      "mode": "managed"
+    },
+    {
+      "path": "drukuj-sale-pon-pt.cmd",
+      "sha256": "aff7e27b895684d0b3f4ccc646f6987d04b3d04c8fd4b1c42e3ca4b8c082cd3f",
+      "bytes": 703,
+      "mode": "managed"
+    },
+    {
+      "path": "INSTRUKCJA.md",
+      "sha256": "8a5a83207df4e174c8048216dd0f442355c2e548fd7b173f5243f2428973f095",
+      "bytes": 23241,
+      "mode": "managed"
+    },
+    {
+      "path": "package.json",
+      "sha256": "b4665a65c598bb8554479f01c21eaddea79ca3e42d5bc6d90c4ef47965701e8a",
+      "bytes": 329,
+      "mode": "managed"
+    },
+    {
+      "path": "plans/001-aktualizacja-kodu-z-github.md",
+      "sha256": "7071aa44a8c14d140e6f45f7e9b48cfa30427bfff19cad3806f70e7f1e8302be",
+      "bytes": 18745,
+      "mode": "managed"
+    },
+    {
+      "path": "plans/README.md",
+      "sha256": "7bb21d220fa33602002eda04350e8c7b912257ad45fb85061e41c564f93924e4",
+      "bytes": 1708,
+      "mode": "managed"
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "993241fa6add20c4ff9d6680232f0017956fdda80a914bce7d5a52e15742186a",
+      "bytes": 30,
+      "mode": "managed"
+    },
+    {
+      "path": "run-all.cmd",
+      "sha256": "0a85d760481af78bb27fde4f873d43032647c1bd845ea16a57083a1f7fe15d2f",
+      "bytes": 1418,
+      "mode": "managed"
+    },
+    {
+      "path": "scripts/build_rooms.py",
+      "sha256": "051f5534d4f0b139a080d1e7ad193d57ded1ca5dd15c682359ecb6f11c6904f0",
+      "bytes": 12510,
+      "mode": "managed"
+    },
+    {
+      "path": "scripts/build_sheets.py",
+      "sha256": "e98babfb71bee67696e3cb016502055182ec76f8ec232dc725f4391b4910855f",
+      "bytes": 5022,
+      "mode": "managed"
+    },
+    {
+      "path": "scripts/check_conflicts.py",
+      "sha256": "00c6c896aef736c41adab47eb1efd4f609037377c477f97774953f1a3bb88251",
+      "bytes": 8121,
+      "mode": "managed"
+    },
+    {
+      "path": "scripts/config.py",
+      "sha256": "b919cc1777108b781ce515bea900f8baca6f51e7562e8b5c04b02d3fc195ad4b",
+      "bytes": 1316,
+      "mode": "local"
+    },
+    {
+      "path": "scripts/fetch_week_pon_pt.py",
+      "sha256": "941ea816b1f67ccc2b735a103ef4b29c06e6c74694865b8c3bb1d9d2d2025039",
+      "bytes": 3013,
+      "mode": "managed"
+    },
+    {
+      "path": "scripts/fetch.py",
+      "sha256": "30434992053f81d2b68c6d514bce13fd5d4324805eb3d4807da8b38de83f9f26",
+      "bytes": 10672,
+      "mode": "managed"
+    },
+    {
+      "path": "scripts/groups.py",
+      "sha256": "8831aafe191fd7b5e7fafa7d69c56791320156e7b4d59b50741f317f68aa803f",
+      "bytes": 3669,
+      "mode": "local"
+    },
+    {
+      "path": "scripts/make_manifest.js",
+      "sha256": "158ff3809578935fd0ac1ccea0cf71fe0548ceb06e5cd5df2e84a44acf0af739",
+      "bytes": 3552,
+      "mode": "managed"
+    },
+    {
+      "path": "scripts/parse.py",
+      "sha256": "154309fef47ef71def6c4390c54b81ab02a76927f20125e9b742e9a8966fa54e",
+      "bytes": 6560,
+      "mode": "managed"
+    },
+    {
+      "path": "scripts/print-additional.js",
+      "sha256": "d94ecd4502bd3269086f968dd10ac10b0bb54b0210b9b5ca07c0d16b74bce211",
+      "bytes": 15578,
+      "mode": "managed"
+    },
+    {
+      "path": "scripts/print.css",
+      "sha256": "c352f5a3394047e5c7a444c79aaa966583d71e30243fc481b06195795a1c1566",
+      "bytes": 5151,
+      "mode": "local"
+    },
+    {
+      "path": "scripts/sheets.js",
+      "sha256": "c2e3694a1b8a6da317b6fa9f686f3158c0bc4390f44f15029f2388e865413c5a",
+      "bytes": 2492,
+      "mode": "managed"
+    },
+    {
+      "path": "scripts/shot_rooms.js",
+      "sha256": "83b9de70b4ecb83f9b973f5891eae97d1bcf57a2f20d3541d8374b78bdd89e62",
+      "bytes": 1819,
+      "mode": "managed"
+    },
+    {
+      "path": "scripts/to_pdf.py",
+      "sha256": "bffc927dc9311a94cdcc98a0c1f95f23d8dc1dbfbbe0356ffadedb2fc5544d4f",
+      "bytes": 1924,
+      "mode": "managed"
+    },
+    {
+      "path": "scripts/verify.py",
+      "sha256": "c48a5ccc47be67b7d397af8cb5bf4a33c016b587e1537a93c8402db5381120c4",
+      "bytes": 4828,
+      "mode": "managed"
+    },
+    {
+      "path": "sprawdz-kolizje.cmd",
+      "sha256": "6800971ab5ec67869452e27a8a3729cde696222eb26479d2f723705b9a7b8a62",
+      "bytes": 193,
+      "mode": "managed"
+    },
+    {
+      "path": "test.cmd",
+      "sha256": "134889a53ef3178bf6f7cc6608ee59156d81858b3b2f8108800e5731c1638106",
+      "bytes": 199,
+      "mode": "managed"
+    },
+    {
+      "path": "tests/test_conflicts.py",
+      "sha256": "f95d6c0af07ab37ab0930c8902593978a0b1a47d488edb1f241cab902cb360aa",
+      "bytes": 5397,
+      "mode": "managed"
+    },
+    {
+      "path": "tests/test_parse.py",
+      "sha256": "d6f92c0d6a8e6dab54f5735f7512a09cb838972dc51468dfd4c30bdee6e26548",
+      "bytes": 3226,
+      "mode": "managed"
+    },
+    {
+      "path": "uruchamianie/1-sprawdz-wymagania.cmd",
+      "sha256": "af0b9803d6d0b2cdc6808fe84cdd3c06e31026eab8e881f5abfadbc31d949fd0",
+      "bytes": 3293,
+      "mode": "managed"
+    },
+    {
+      "path": "uruchamianie/2-skanuj-i-generuj.cmd",
+      "sha256": "51561c2eda54ca9e61bee688f50a6b890a9b6faccba9c06a6057eb64f30f40e9",
+      "bytes": 1202,
+      "mode": "managed"
+    },
+    {
+      "path": "URUCHOM.cmd",
+      "sha256": "b48379200b7627a285bd1ebcf09b2bd07fb5d1dcec67812b115d9ea87f6f1dda",
+      "bytes": 628,
+      "mode": "local"
+    }
+  ],
+  "sig": "Khr58W/QaaBHQ1VsyqfDn3fcXY74bl8cZu/xKWibygWkMC/ekos9ChWwa0tecYFxItMl9MzTp6glHaT1iEHrDg=="
+}

@@ -1,0 +1,14 @@
+{
+  "name": "plany-zajec-usos",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Plany sal z USOSweb UKW -> PNG per sala + kartki A4 + PDF",
+  "type": "commonjs",
+  "scripts": {
+    "rooms": "node scripts/shot_rooms.js",
+    "sheets": "node scripts/sheets.js"
+  },
+  "dependencies": {
+    "playwright": "^1.63.0"
+  }
+}
