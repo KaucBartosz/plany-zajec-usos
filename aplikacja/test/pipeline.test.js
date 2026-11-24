@@ -32,6 +32,24 @@ test('każdy skrypt z przebiegu jest w manifeście aktualizacji', () => {
   }
 });
 
+test('każdy plik źródłowy aplikacji jest objęty manifestem', () => {
+  const known = new Set([...MANAGED, ...LOCAL]);
+  const srcRoot = path.join(root, 'aplikacja/src');
+  const missing = [];
+  const walk = (dir) => {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) walk(full);
+      else {
+        const relative = path.relative(root, full).split(path.sep).join('/');
+        if (!known.has(relative)) missing.push(relative);
+      }
+    }
+  };
+  walk(srcRoot);
+  assert.deepEqual(missing, []);
+});
+
 test('każdy krok ma opis, egzekutor i istniejący plik', () => {
   for (const step of steps) {
     assert.ok(step.label, 'brak etykiety kroku');

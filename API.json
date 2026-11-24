@@ -1,13 +1,13 @@
 {
   "schema": 1,
-  "version": "2026.11.24-3",
-  "publishedAt": "2026-11-24T12:24:24.488Z",
+  "version": "2026.11.24-4",
+  "publishedAt": "2026-11-24T12:30:21.917Z",
   "minRuntime": {
     "python": "3.10",
     "node": "18",
     "electron": "37"
   },
-  "base": "https://raw.githubusercontent.com/KaucBartosz/plany-zajec-usos/v2026.11.24-3/",
+  "base": "https://raw.githubusercontent.com/KaucBartosz/plany-zajec-usos/v2026.11.24-4/",
   "files": [
     {
       "path": "aplikacja/package.json",
@@ -46,6 +46,12 @@
       "mode": "managed"
     },
     {
+      "path": "aplikacja/src/main/preload.js",
+      "sha256": "0a66f699cfa6d32d33737cc5552a1be7b67d184c8ce3f86e7a0eecaacf140d55",
+      "bytes": 786,
+      "mode": "managed"
+    },
+    {
       "path": "aplikacja/src/main/update-core.js",
       "sha256": "dab197a34c5aa817356e05140ae2ca9663a7f7990a24f9e7404d133063c220bc",
       "bytes": 7933,
@@ -53,7 +59,7 @@
     },
     {
       "path": "aplikacja/src/main/update-trust.js",
-      "sha256": "1492a6c9e295861361329900cb5f32118d7ec8f7f80f79b418662af249dc0a26",
+      "sha256": "6c49449781944ec40357f65f36e1d4e43d821f7018c7ed299cdf3335eccf8057",
       "bytes": 694,
       "mode": "local"
     },
@@ -113,8 +119,8 @@
     },
     {
       "path": "aplikacja/test/pipeline.test.js",
-      "sha256": "3d0b66e3ba7fcbf1dd491cdd5c1e3a77d63f012b52be08374b9b400891e7dd35",
-      "bytes": 1700,
+      "sha256": "f5057564b0101182ede35388d5aed9cac46909f76910128391db56a22fd2aa6f",
+      "bytes": 2308,
       "mode": "managed"
     },
     {
@@ -227,8 +233,8 @@
     },
     {
       "path": "scripts/make_manifest.js",
-      "sha256": "7e5af5ccec4e0e68b10e0be9cf9095e0e95d84e39562767dd251b93ac109e852",
-      "bytes": 3738,
+      "sha256": "e4928377eb1374fab1884179de55e006ac70cb853d75166e49496924121ac54e",
+      "bytes": 3810,
       "mode": "managed"
     },
     {
@@ -298,6 +304,12 @@
       "mode": "managed"
     },
     {
+      "path": "tests/fixtures/plan-sample.html",
+      "sha256": "3a5c6f8323b8b0bfe976dcc1956e68a59031a3bb563288f61727e82d71a94fc4",
+      "bytes": 1459,
+      "mode": "managed"
+    },
+    {
       "path": "tests/test_conflicts.py",
       "sha256": "f95d6c0af07ab37ab0930c8902593978a0b1a47d488edb1f241cab902cb360aa",
       "bytes": 5397,
@@ -334,5 +346,5 @@
       "mode": "local"
     }
   ],
-  "sig": "cBqm5g7Lt6vvkYqUE6f3RPFq+jB6yn2J0ntWTiOCfGGQmXBG03OWWIOvMBN8ZnVrlCFgVL4r8Qb3JlNj2yrGAQ=="
+  "sig": "tssx5w7MBxO4p4jTnTVAyQGIGrHED0rhAGBpVYyg8u1JDNYbJthRLPTH6DPwqW4Mg9ySbEc1qEsd/wSZ0Cz2Bg=="
 }
