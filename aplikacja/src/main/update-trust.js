@@ -6,7 +6,7 @@
 module.exports = {
   version: '2026.11.24-2',
   // Manifest leży na stabilnej ścieżce — podpis i hashe chronią przed podmianą.
-  manifestUrl: 'https://raw.githubusercontent.com/KaucBartosz/plany-zajec-usos/main/API.json',
+  manifestUrl: 'https://raw.githubusercontent.com/KaucBartosz/plany-zajec-usos/master/API.json',
   // Pliki są pobierane z niezmiennego tagu wydania.
   fileBaseUrl: 'https://raw.githubusercontent.com/KaucBartosz/plany-zajec-usos/v2026.11.24-2/',
   minRuntime: { python: '3.10', node: '18', electron: '37' },

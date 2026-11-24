@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "version": "2026.11.24-2",
-  "publishedAt": "2026-11-24T11:33:35.786Z",
+  "publishedAt": "2026-11-24T11:37:57.495Z",
   "minRuntime": {
     "python": "3.10",
     "node": "18",
@@ -53,8 +53,8 @@
     },
     {
       "path": "aplikacja/src/main/update-trust.js",
-      "sha256": "c28371b9f44ff7a10340c283d73c7488931c2f869a3cbfa51de6ced61beb084f",
-      "bytes": 692,
+      "sha256": "168a659d058b860f0c65dca1084214e27d6c5e91f42880ae822c1f739847dcfb",
+      "bytes": 694,
       "mode": "local"
     },
     {
@@ -310,5 +310,5 @@
       "mode": "local"
     }
   ],
-  "sig": "oHz5zY+19OHS4wuq8BD3dblemFrJA+QmKu6ojssJuAT75RAlZ3I3OLHMn6MJlb3lq4gNDPTPjdL1kOVZY9TXCg=="
+  "sig": "gjXKhntjJl1UQKX4IRWYstVg5IbM5urT2xmJItK5nDvVZPx6i9YgoL+NFtbNSINYLhfNrGHgwI3BaVlr7xxwBA=="
 }
