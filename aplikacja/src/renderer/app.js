@@ -159,6 +159,20 @@ function groupKeyOptions(sourceEntries) {
   });
 }
 
+function groupNumberOptions(sourceEntries) {
+  const allowed = new Set(groupKeyOptions(sourceEntries));
+  if (state.criteria.groupKeys.length) {
+    for (const key of [...allowed]) {
+      if (!state.criteria.groupKeys.includes(key)) allowed.delete(key);
+    }
+  }
+  const numbers = new Set();
+  for (const entry of sourceEntries) {
+    if (allowed.has(entry.groupKey) && entry.group) numbers.add(String(entry.group).trim());
+  }
+  return [...numbers].sort((a, b) => a.localeCompare(b, 'pl', { numeric: true }));
+}
+
 function optionItems(key, values) {
   return values.map((value) => {
     const checked = state.criteria[key].includes(value) ? ' checked' : '';
@@ -166,13 +180,10 @@ function optionItems(key, values) {
   }).join('');
 }
 
-function refreshGroupKeyOptions() {
-  const details = document.querySelector('#filtry details[data-section="groupKeys"]');
-  if (!details) return;
-  const sourceEntries = state.data.entries.filter((entry) => entry.source === state.criteria.source);
-  const summary = details.querySelector('summary');
-  details.innerHTML = summary.outerHTML + optionItems('groupKeys', groupKeyOptions(sourceEntries));
-  updateBadge('groupKeys');
+function renderFiltersPreservingScroll() {
+  const scroll = $('#filtry').scrollTop;
+  renderFilters();
+  $('#filtry').scrollTop = scroll;
 }
 
 function renderFilters() {
@@ -180,6 +191,7 @@ function renderFilters() {
   const sourceEntries = state.data.entries.filter((entry) => entry.source === state.criteria.source);
   const options = collectOptions(sourceEntries);
   const keys = groupKeyOptions(sourceEntries);
+  const numbers = groupNumberOptions(sourceEntries);
   const sourceRadio = (value, label) => {
     const checked = state.criteria.source === value ? ' checked' : '';
     return `<label class="opt"><input type="radio" name="source" value="${value}"${checked}> <span>${label}</span></label>`;
@@ -199,8 +211,8 @@ function renderFilters() {
     }).join(''))}
     ${checkboxGroup('Prowadzący', 'teachers', options.teachers)}
     ${checkboxGroup('Rocznik', 'years', options.years)}
-    ${checkboxGroup('Grupa planu', 'groupKeys', keys)}
-    ${checkboxGroup('Numer grupy', 'groupNumbers', options.groupNumbers)}
+    ${checkboxGroup('Specjalność', 'groupKeys', keys)}
+    ${checkboxGroup('Numer grupy', 'groupNumbers', numbers)}
     ${checkboxGroup('Dzień', 'days', options.days)}
     ${checkboxGroup('Typ zajęć', 'types', options.types)}
     ${section('visible', 'Widoczne kolumny', (VIEW_COLUMNS[state.view] || FIELD_KEYS).map((key) => {
@@ -218,6 +230,14 @@ function pruneGroupKeys() {
       && (!state.criteria.years.length || state.criteria.years.includes(info.year));
   });
   updateBadge('groupKeys');
+}
+
+function pruneGroupNumbers() {
+  if (!state.criteria.groupNumbers.length || !state.data) return;
+  const sourceEntries = state.data.entries.filter((entry) => entry.source === state.criteria.source);
+  const allowed = new Set(groupNumberOptions(sourceEntries));
+  state.criteria.groupNumbers = state.criteria.groupNumbers.filter((number) => allowed.has(number));
+  updateBadge('groupNumbers');
 }
 
 function renderTable(entries) {
@@ -417,7 +437,11 @@ document.addEventListener('change', (event) => {
     updateBadge(target.dataset.filter);
     if (target.dataset.filter === 'years') {
       pruneGroupKeys();
-      refreshGroupKeyOptions();
+      pruneGroupNumbers();
+      renderFiltersPreservingScroll();
+    } else if (target.dataset.filter === 'groupKeys') {
+      pruneGroupNumbers();
+      renderFiltersPreservingScroll();
     }
     renderResults();
   } else if (target.dataset.visible) {
@@ -437,7 +461,8 @@ document.addEventListener('change', (event) => {
   } else if (target.name === 'study-type') {
     state.criteria.studyType = target.value;
     pruneGroupKeys();
-    refreshGroupKeyOptions();
+    pruneGroupNumbers();
+    renderFiltersPreservingScroll();
     renderResults();
   } else if (target.name === 'view') {
     state.view = target.value;
@@ -495,6 +520,8 @@ async function load() {
       statusText += ' · wydruki nieaktualne';
     }
     $('#status').textContent = statusText;
+    pruneGroupKeys();
+    pruneGroupNumbers();
     renderFilters();
     renderResults();
   } catch (error) {

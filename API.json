@@ -1,13 +1,13 @@
 {
   "schema": 1,
-  "version": "2026.11.24-7",
-  "publishedAt": "2026-11-24T13:04:39.386Z",
+  "version": "2026.11.24-8",
+  "publishedAt": "2026-11-24T13:30:38.609Z",
   "minRuntime": {
     "python": "3.10",
     "node": "18",
     "electron": "37"
   },
-  "base": "https://raw.githubusercontent.com/KaucBartosz/plany-zajec-usos/v2026.11.24-7/",
+  "base": "https://raw.githubusercontent.com/KaucBartosz/plany-zajec-usos/v2026.11.24-8/",
   "files": [
     {
       "path": "aplikacja/package.json",
@@ -17,19 +17,19 @@
     },
     {
       "path": "aplikacja/PLAN.md",
-      "sha256": "80ec066b4ca94b547485fd33125971fc2f6989a39f5aff35403a332d938303a5",
-      "bytes": 11394,
+      "sha256": "2608b7556db32ea0801b819db057a06253182398332cc3aa899bde7d1a701971",
+      "bytes": 11416,
       "mode": "managed"
     },
     {
       "path": "aplikacja/README.md",
-      "sha256": "594dbe70f89c42ca4a35cdaa16ce2624bef3c40699ec854a3ca1cd6d91fd91cb",
-      "bytes": 6080,
+      "sha256": "3eaf4d37baa3ce576d778f6eda7075e8dbea9af705a28278a428c7dda3b194c1",
+      "bytes": 5994,
       "mode": "managed"
     },
     {
       "path": "aplikacja/src/main/app-version.json",
-      "sha256": "65bf491abb0274b710918761f5136716939e99bb866cd4cf457abcc81fad4331",
+      "sha256": "281884037f7a150f7e6e65d07d11e69fd727521e7bacd3df5daca0ece4b59f76",
       "bytes": 32,
       "mode": "managed"
     },
@@ -83,8 +83,8 @@
     },
     {
       "path": "aplikacja/src/renderer/app.js",
-      "sha256": "5b039ac04f694cc53ae75ce0d3eec3e354c0535996c3bc8528647dd29443ca0a",
-      "bytes": 33337,
+      "sha256": "2cc238e56170796085f571b01c42dfdd16128e31b33d733a60eff1307e3c0571",
+      "bytes": 34235,
       "mode": "managed"
     },
     {
@@ -166,33 +166,15 @@
       "mode": "managed"
     },
     {
-      "path": "check-changes.cmd",
-      "sha256": "6b4bb8d36f2a32d8e0ba9599f96498c17324ae36b81dc7f136eeda7e2b80915c",
-      "bytes": 496,
-      "mode": "managed"
-    },
-    {
-      "path": "drukuj-grupy-weekend.cmd",
-      "sha256": "c2ace5c7d86a24b7ad6b699cdd0302e96fff93e0f8d10e694c55568f1177725c",
-      "bytes": 593,
-      "mode": "managed"
-    },
-    {
-      "path": "drukuj-sale-pon-pt.cmd",
-      "sha256": "aff7e27b895684d0b3f4ccc646f6987d04b3d04c8fd4b1c42e3ca4b8c082cd3f",
-      "bytes": 703,
-      "mode": "managed"
-    },
-    {
       "path": "INSTRUKCJA.md",
-      "sha256": "fb847f1004dee2841bd634cf608f34acf45fdb9296de638db196a7a858abb174",
-      "bytes": 24906,
+      "sha256": "2f79ef7535b5026388d7758e734e35d08f2b2f78ae116d46d1475e108cee7675",
+      "bytes": 23126,
       "mode": "managed"
     },
     {
       "path": "launcher.cmd",
-      "sha256": "b48379200b7627a285bd1ebcf09b2bd07fb5d1dcec67812b115d9ea87f6f1dda",
-      "bytes": 628,
+      "sha256": "adc86368024c7c685c704079dcb767027c198a178d92fe35d775802f995edde4",
+      "bytes": 488,
       "mode": "managed"
     },
     {
@@ -217,12 +199,6 @@
       "path": "requirements.txt",
       "sha256": "993241fa6add20c4ff9d6680232f0017956fdda80a914bce7d5a52e15742186a",
       "bytes": 30,
-      "mode": "managed"
-    },
-    {
-      "path": "run-all.cmd",
-      "sha256": "fe33366df5f7f9bff499167fdae5b622dd45125c2e0b5937807b88ebc8b743a6",
-      "bytes": 1549,
       "mode": "managed"
     },
     {
@@ -287,14 +263,8 @@
     },
     {
       "path": "scripts/make_manifest.js",
-      "sha256": "c417bd1ce235bd9aeaa994f188154e2de075039cc1dcbdf34fc2651628948002",
-      "bytes": 4530,
-      "mode": "managed"
-    },
-    {
-      "path": "scripts/make_runall.js",
-      "sha256": "b435bc7e26a5d927c1b8f8243ebb540454b55f73a505db052ca31911442d2fce",
-      "bytes": 1757,
+      "sha256": "9e3be827eecf4cb523c40487fa4664a53898a7b9d8452e49871b4b5bb802243c",
+      "bytes": 4419,
       "mode": "managed"
     },
     {
@@ -364,18 +334,6 @@
       "mode": "managed"
     },
     {
-      "path": "sprawdz-kolizje.cmd",
-      "sha256": "6800971ab5ec67869452e27a8a3729cde696222eb26479d2f723705b9a7b8a62",
-      "bytes": 193,
-      "mode": "managed"
-    },
-    {
-      "path": "test.cmd",
-      "sha256": "134889a53ef3178bf6f7cc6608ee59156d81858b3b2f8108800e5731c1638106",
-      "bytes": 199,
-      "mode": "managed"
-    },
-    {
       "path": "tests/fixtures/plan-sample.html",
       "sha256": "3a5c6f8323b8b0bfe976dcc1956e68a59031a3bb563288f61727e82d71a94fc4",
       "bytes": 1459,
@@ -400,23 +358,11 @@
       "mode": "managed"
     },
     {
-      "path": "uruchamianie/1-sprawdz-wymagania.cmd",
-      "sha256": "af0b9803d6d0b2cdc6808fe84cdd3c06e31026eab8e881f5abfadbc31d949fd0",
-      "bytes": 3293,
-      "mode": "managed"
-    },
-    {
-      "path": "uruchamianie/2-skanuj-i-generuj.cmd",
-      "sha256": "51561c2eda54ca9e61bee688f50a6b890a9b6faccba9c06a6057eb64f30f40e9",
-      "bytes": 1202,
-      "mode": "managed"
-    },
-    {
       "path": "URUCHOM.cmd",
       "sha256": "0d8eadd97660ffdc3ae96b24e9cbc518d71e7ccaeecd12d7a1f8a790ad48d6f3",
       "bytes": 56,
       "mode": "local"
     }
   ],
-  "sig": "f7vME6/dwSmENzki1JX2eT2WKjAgMsYgtzHIMhbbaWWQNI+pvFzs81/8HR3HtxGyvLKYNzWIszWgdmJWBvydDA=="
+  "sig": "ip0jOwV8NB9GkAih9EpGp85LrFQF/smROK6RB4qej2Jc1TSTyMHlsAZim9VLARCw2EijCrf57w8prlh9dcp8Dw=="
 }

@@ -47,7 +47,7 @@ Wszystkie kryteria łączą się koniunkcją (AND). Puste zestawienie = „bez o
 | wyszukiwarka | `course`, `teacher`, `room`, `code`, `note` | dowolny fragment tekstu |
 
 Uwaga: „ten tydzień” i „ten weekend” można łączyć — wtedy dostajemy weekend
-z aktualnego tygodnia (dokładnie to, co robi `drukuj-grupy-weekend.cmd`).
+z aktualnego tygodnia (dokładnie to, co generuje faza wydruków aplikacji).
 
 Sortowanie wyników: dzień (stała kolejność `Poniedziałek → Niedziela`), godzina
 początku, godzina końca, przedmiot.
@@ -99,8 +99,8 @@ przełączanie filtrów nie wymaga ponownego czytania plików ani IPC.
 `fs`, tylko do jednej jawnie wystawionej metody.
 
 Ścieżka danych liczona jest z `__dirname` main.js: `aplikacja/src/main` → trzy
-poziomy w górę = folder główny projektu. Wymaga uruchomienia `run-all.cmd` przed
-pierwszym startem aplikacji.
+poziomy w górę = folder główny projektu. Przed pierwszym użyciem widoków
+trzeba pobrać dane w zakładce „Pobieranie danych".
 
 ## 6. UI
 

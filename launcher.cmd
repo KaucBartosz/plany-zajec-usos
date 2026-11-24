@@ -5,8 +5,7 @@ call "%~dp0runtime\_env.cmd"
 cd /d "%PLANER_ROOT%"
 
 if not exist plan.json (
-  echo Pierwsze uruchomienie: pobieranie i generowanie planow...
-  call "%PLANER_ROOT%\run-all.cmd" || goto :err
+  echo Brak danych. Uruchom aplikacje i uzyj zakladki "Pobieranie danych".
 )
 
 if not "%PLANER_NO_UPDATE%"=="1" (
@@ -17,7 +16,3 @@ if not "%PLANER_NO_UPDATE%"=="1" (
 
 start "" "%PLANER_ROOT%\aplikacja\node_modules\electron\dist\electron.exe" "%PLANER_ROOT%\aplikacja"
 exit /b 0
-
-:err
-echo [BLAD] Nie udalo sie wygenerowac danych. Uruchom run-all.cmd, aby zobaczyc blad.
-exit /b 1

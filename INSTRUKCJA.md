@@ -44,8 +44,7 @@ przeglądarkę Chromium dla Playwright oraz bibliotekę Electron. Nie trzeba
 instalować Pythona, Node'a, npm ani Chromium. Dane (`plan.json`, `html/`)
 i gotowe wydruki (`out/`) są już w folderze, więc aplikacja startuje od razu,
 także bez internetu. Internet jest potrzebny tylko do odświeżenia planów
-(zakładka „Pobieranie danych" w aplikacji albo `run-all.cmd`) oraz do
-aktualizacji kodu.
+(zakładka „Pobieranie danych" w aplikacji) oraz do aktualizacji kodu.
 
 Pełną kopię folderu trzeba zrobić tylko raz. Przy każdym kolejnym starcie
 `URUCHOM.cmd` sprawdza podpisany manifest `API.json` w publicznym
@@ -71,13 +70,13 @@ runtime\node\node.exe aplikacja\src\main\update.js --apply       # wymuszenie
 runtime\node\node.exe aplikacja\src\main\update.js --rollback    # powrót do kopii .bak
 ```
 
-Pozostałe skrypty (`run-all.cmd`, `test.cmd`, `check-changes.cmd`,
-`drukuj-*.cmd`, `sprawdz-kolizje.cmd`) same wczytują ustawienia z
-`runtime\_env.cmd`, więc działają także bez systemowych runtime'ów.
+Wszystkie codzienne działania wykonujesz w aplikacji. Osobne skrypty `.cmd`
+zostały usunięte — nie ma już `run-all.cmd`, `test.cmd`, `check-changes.cmd`,
+`drukuj-*.cmd` ani `sprawdz-kolizje.cmd`.
 
 **Odświeżanie danych i wydruki to dwie fazy.** Lista kroków jest w jednym
-pliku, `scripts\pipeline.json`; `run-all.cmd` jest z niego generowany
-(`node scripts\make_runall.js`). Kliknięcie „Rozpocznij pobieranie" w aplikacji
+pliku, `scripts\pipeline.json`, i czyta ją bezpośrednio program.
+Kliknięcie „Rozpocznij pobieranie" w aplikacji
 uruchamia najpierw fazę danych (`fetch.py --only-changed`,
 `fetch_week_pon_pt.py --only-changed`, `parse.py`), a po niej — automatycznie —
 fazę wydruków (plansze sal, PNG, kartki A4, PDF, wydruk grup i `verify.py`).
@@ -91,39 +90,13 @@ kanałem i nie nadpisuje danych.
 
 ### Klasyczne uruchomienie (gdy system ma Python i Node)
 
-```powershell
-cd "$env:USERPROFILE\Desktop\PlanyZajec-USOS"
-.\run-all.cmd
-```
+Aplikację uruchamiasz poleceniem `npm start` w folderze `aplikacja`. Dane
+i wydruki generuje wyłącznie zakładka „Pobieranie danych". Wersja przenośna
+używa `URUCHOM.cmd`, który tylko wywołuje aktualizator i okno aplikacji.
+Python 3.10+ i Node.js 18+ są wymagane; wersja przenośna ma je w folderze
+`runtime\`, więc nic nie trzeba instalować.
 
-`run-all.cmd` robi wszystko po kolei (pobranie → parse → plansze → kartki → PDF →
-kontrola) i otwiera folder z PDF-em. Pierwsze uruchomienie instaluje Playwrighta
-i Pillow.
-
-Dodatkowe wydruki, bez zmieniania ani ponownego uruchamiania głównego przebiegu:
-
-```powershell
-.\drukuj-sale-pon-pt.cmd      # jedna sala na stronie A4, tylko poniedziałek–piątek
-.\drukuj-grupy-weekend.cmd    # grupy z zajęciami w sobotę i niedzielę
-```
-
-Do przekazania projektu na inny komputer służą dwa skrypty w `uruchamianie\`:
-
-```powershell
-.\uruchamianie\1-sprawdz-wymagania.cmd  # instaluje brakujące pakiety i Chromium
-.\uruchamianie\2-skanuj-i-generuj.cmd   # pobiera plany i generuje wszystkie wydruki
-```
-
-Skopiuj cały folder projektu, nie sam folder `uruchamianie`. Python 3.10+ i
-Node.js 18+ są wymagane. Pierwszy skrypt sprawdza ich obecność; jeśli któregoś
-brakuje, instaluje Python 3.12 lub Node.js LTS przez winget. Po tej instalacji
-uruchom go ponownie w nowym oknie, aby odświeżyć ścieżki systemowe i doinstalować
-pakiety Pythona, Playwright oraz Chromium. Drugi skrypt sam uruchamia ten test
-przed pobraniem i generowaniem planów. Jeśli winget nie jest dostępny, doinstaluj
-App Installer ze sklepu Microsoft Store.
-
-Dwa dodatkowe wydruki korzystają z danych i planów utworzonych przez `run-all.cmd`.
-PDF-y i obrazy PNG zapisują się w osobnych katalogach:
+Wydruki powstają w ramach fazy wydruków i zapisują się w osobnych katalogach:
 `out\druk\sale-pon-pt\` oraz `out\druk\grupy-weekend\` (obrazy w podkatalogu
 `png\`). Wydruk grup zawiera dzień, godziny, numer grupy, przedmiot, salę i imię
 z nazwiskiem prowadzącego (z USOS);
@@ -134,35 +107,11 @@ powtarzanego numeru przy sali, a zajęcia odbywające się równolegle są
 umieszczane obok siebie, gdy jest na to miejsce. Języki bez sali są pomijane.
 Zakres dat jest widoczny w nagłówku obrazu.
 
-Sprawdzenie, czy plany w USOS się zmieniły (nie nadpisuje pobranych planów
-semestralnych; zapisuje osobny raport wariantów tygodniowych):
-
-```powershell
-.\check-changes.cmd
-```
-
-Testy i kontrola kolizji (nie wymagają pobierania danych):
-
-```powershell
-.\test.cmd               # testy Python: parser USOS + wykrywanie kolizji
-.\sprawdz-kolizje.cmd    # raport kolizji -> out\kolizje.json (kod 1 = są kolizje)
-```
-
-Ręczne uruchamianie krok po kroku:
-
-```powershell
-python scripts\fetch.py          # 1. HTML
-python scripts\parse.py          # 2. plan.json
-python scripts\build_rooms.py    # 3. HTML plansz
-node   scripts\shot_rooms.js     # 4. PNG sal
-python scripts\build_sheets.py   # 5. HTML kartek (mierzy sekcje)
-node   scripts\sheets.js         # 6. PNG kartek
-python scripts\to_pdf.py         # 7. PDF
-python scripts\verify.py         # 8. kontrola
-
-python -m unittest discover -s tests -v   # testy parsera i kolizji
-python scripts\check_conflicts.py         # kontrola kolizji (opcjonalnie)
-```
+Kontrola kolizji pozostaje jako skrypt deweloperski
+`python scripts\check_conflicts.py`; zapisuje `out\kolizje.json`
+(kod 1 = są kolizje). Testy uruchamia się poleceniem
+`python -m unittest discover -s tests -v`. Są to narzędzia pomocnicze,
+nie część codziennego przebiegu w aplikacji.
 
 ---
 
@@ -189,17 +138,16 @@ PlanyZajec-USOS\
   INSTRUKCJA.md        ← ten plik
   URUCHOM.cmd          ← start w wersji przenośnej (bez instalacji)
   runtime\             ← przenośny Python, Node, Chromium, _env.cmd
-  run-all.cmd          ← pełny przebieg
-  check-changes.cmd    ← czy plany się zmieniły
-  test.cmd             ← testy Python (parser + kolizje)
-  sprawdz-kolizje.cmd  ← raport kolizji
+  launcher.cmd         ← wywoływany przez URUCHOM.cmd (aktualizacja + start)
+  API.json             ← podpisany manifest aktualizacji kodu
   requirements.txt     ← Pillow
   package.json         ← Playwright
   scripts\
-    groups.py          ← KODY GRUP (grupa_kod, cykl) + URL-e stron wydziału
-    config.py          ← budynek, semestr, sale „ultra”, parametry A4/PDF
-    print.css          ← JEDEN styl wszystkich wydruków (sal, kartek, eksportu)
-    fetch.py           ← pobieranie HTML (cookie jar, manifest, --check)
+    pipeline.json      ← lista kroków obu faz (jedyna, czyta ją GUI)
+    groups_default.py  ← KODY GRUP (aktualizowane); groups.py = lokalne nadpisanie
+    config_default.py  ← konfiguracja (aktualizowana); config.py = lokalne nadpisanie
+    print_default.css  ← styl wydruków (aktualizowany); print.css = nadpisanie
+    fetch.py           ← pobieranie HTML (cookie jar, manifest, --only-changed)
     parse.py           ← HTML → plan.json
     check_conflicts.py ← kolizje sal / prowadzących / grup
     build_rooms.py     ← plan.json → HTML plansz sal
@@ -463,7 +411,7 @@ prowadzącego lub numeru grupy. Nie myli przy tym:
 - tego samego kodu przedmiotu w kilku planach grup (jedne zajęcia, nie kolizja).
 
 Wynik trafia na ekran i do `out\kolizje.json`. Kod wyjścia 1 oznacza, że kolizje
-są — skrypt nie jest częścią `run-all.cmd`, żeby nie przerywać wydruku.
+są — skrypt nie jest częścią przebiegu wydruków, żeby go nie przerywać.
 
 ---
 
@@ -484,7 +432,7 @@ są — skrypt nie jest częścią `run-all.cmd`, żeby nie przerywać wydruku.
 | jakość renderu | `scripts/shot_rooms.js`, `scripts/sheets.js` | `deviceScaleFactor` (3 = 3x) |
 | format PDF | `scripts/to_pdf.py` + `config.py` | `PDF_W`, `PDF_H`, `PDF_DPI` |
 | wydanie nowej wersji kodu | `scripts/release.js` | podbija wersję, odnawia `API.json`, sprawdza testy; `--apply` robi commit, push, tag i push tagu |
-| listę kroków pobierania i wydruków | `scripts/pipeline.json` | fazy `data` i `build`; `run-all.cmd` generuje `make_runall.js` |
+| listę kroków pobierania i wydruków | `scripts/pipeline.json` | fazy `data` i `build`, czytane bezpośrednio przez GUI |
 | listę plików aktualizowanych z GitHub | `scripts/make_manifest.js` | `MANAGED`, `LOCAL` (hash + podpis trafiają do `API.json`) |
 | adres repo i klucz publiczny | `aplikacja/src/main/update-trust.js` | `manifestUrl`, `publicKey` (klucz prywatny poza repo) |
 | wyłączenie autoaktualizacji | zmienna `PLANER_NO_UPDATE=1` | aktualizator nie jest wywoływany |

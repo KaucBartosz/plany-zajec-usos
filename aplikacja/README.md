@@ -39,8 +39,9 @@ runtime\node\node.exe aplikacja\src\main\update.js --rollback
 
 ### Gdy Python i Node są zainstalowane w systemie
 
-Aplikacja korzysta z danych już wygenerowanych w folderze nadrzędnym (`plan.json`,
-`html/week/plan.json`). Najpierw `run-all.cmd` w głównym folderze, potem:
+Aplikacja korzysta z danych w folderze nadrzędnym (`plan.json`,
+`html/week/plan.json`). Jeśli jeszcze ich nie ma, uruchom aplikację i użyj
+zakładki „Pobieranie danych". W konsoli tylko start:
 
 ```powershell
 cd aplikacja
@@ -98,15 +99,8 @@ Log i pasek postępu pokazują numer fazy i bieżący krok. Znaczniki czasu
 znajdują się w `out\stan.json`; pasek statusu informuje, gdy wydruki są starsze
 niż dane. Dane w zakładce „Plan" ładują się ponownie po zakończeniu.
 
-Ręcznie, bez aplikacji, pobranie planu na bieżący tydzień (Pon–Pt)
-dla grup stacjonarnych:
-
-```powershell
-python scripts\fetch_week_pon_pt.py     # z folderu głównego projektu
-# albo: aplikacja\pobierz-tydzien-pn-pt.cmd
-```
-
-Wynik: `html/week/pon-pt/*.html` i `html/week/plan-pon-pt.json`.
+Plan na bieżący tydzień (Pon–Pt) dla grup stacjonarnych pobiera faza danych
+w aplikacji. Wynik trafia do `html/week/pon-pt/` i `html/week/plan-pon-pt.json`.
 Pliki niestacjonarnych (`html/week/plan.json`) nie są nadpisywane.
 
 ## Status
@@ -115,7 +109,7 @@ Pliki niestacjonarnych (`html/week/plan.json`) nie są nadpisywane.
   karty grup, plansza sali), pełne pobieranie z USOS z zakładką postępu,
   eksport PDF/PNG, zapis ustawień w `localStorage`, testy.
 - „Plansza sali" i eksport tego widoku scalają zajęcia w jednej porze w jeden
-  blok — tak samo jak plansze sal z `run-all.cmd`. Tabela zostaje surowa.
+  blok — tak samo jak plansze sal generowane przez aplikację. Tabela zostaje surowa.
 - „Karty grup" mają układ z wydruku weekendowego
   (`out\druk\grupy-weekend\png\N-III.png`): zajęcia w tej samej porze są w jednym
   bloku, równoległe rozdziela `|`, przy sali widać numery grup, a w nagłówku
