@@ -52,10 +52,16 @@ Pełną kopię folderu trzeba zrobić tylko raz. Przy każdym kolejnym starcie
 repozytorium i — jeśli jest nowsza wersja — pobiera tylko pliki kodu
 (`scripts\`, `aplikacja\src\`, testy i dokumentację, łącznie kilkaset kB),
 weryfikuje ich hashe i zamienia je atomowo. Dane (`plan.json`, `html\`,
-`out\`) oraz pliki lokalne (`scripts\config.py`, `scripts\groups.py`,
-`scripts\print.css`, `URUCHOM.cmd`) nie są nadpisywane. Po aktualizacji
-wymagany jest restart aplikacji. Bez internetu aktualizator milczy i start
-przebiega normalnie; można go też wyłączyć zmienną `PLANER_NO_UPDATE=1`.
+`out\`) nie są nadpisywane. Pliki, które można edytować lokalnie
+(`scripts\config.py`, `scripts\groups.py`, `scripts\print.css`, `URUCHOM.cmd`,
+`aplikacja\src\main\update-trust.js`), pozostają nietknięte — ale ich
+**wartości domyślne** leżą w plikach aktualizowanych (`config_default.py`,
+`groups_default.py`, `print_default.css`, `launcher.cmd`) i docierają na
+urządzenie. Lokalny plik jest tylko nadpisaniem: `config.py` i `groups.py`
+importują domyślne wartości, `print.css` jest dołączany po arkuszu domyślnym,
+a `URUCHOM.cmd` woła `launcher.cmd`. Po aktualizacji wymagany jest restart.
+Bez internetu aktualizator milczy i start przebiega normalnie; można go też
+wyłączyć zmienną `PLANER_NO_UPDATE=1`.
 
 Ręcznie:
 

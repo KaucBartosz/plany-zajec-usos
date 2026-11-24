@@ -17,6 +17,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import config  # noqa: E402
+from css import load_print_css  # noqa: E402
 from build_rooms import (BASE, WEEK, END, DAY_ORDER, merge_slots, merge_ultra,  # noqa: E402
                          box_compact, box_ultra, section_cols, room_slug, esc,
                          FOOT, ULTRA, rooms)
@@ -27,9 +28,7 @@ BUDGET = config.BUDGET
 SEG_GAP = config.SEG_GAP
 BUILDING = config.BUILDING
 
-with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'print.css'),
-          encoding='utf-8') as f:
-    CSS = f.read()
+CSS = load_print_css(BASE)
 
 # Kartki są gęstsze niż pojedyncze plany sal — nadpisujemy tylko zmienne.
 SHEET_VARS = ('--card-pad:24px 26px 18px;--days-mt:0px;--dhead-fs:13px;'

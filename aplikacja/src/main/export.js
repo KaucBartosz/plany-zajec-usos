@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { buildHtml } = require('./export-template');
+const { loadPrintCss } = require('./print-css');
 
 const MAX_WIDTH = 1047;   // A4 landscape z 10 mm marginesem, px CSS
 const MAX_HEIGHT = 718;
@@ -69,7 +70,7 @@ async function exportPlan(root, payload) {
   const onePdf = payload.onePdf !== false;
   const pack = Boolean(payload.pack);
   const chromium = loadChromium(root);
-  const css = fs.readFileSync(path.join(root, 'scripts', 'print.css'), 'utf8');
+  const css = loadPrintCss(root);
   const html = buildHtml(payload, css);
   const dir = path.join(root, 'out', 'eksport');
   fs.mkdirSync(dir, { recursive: true });

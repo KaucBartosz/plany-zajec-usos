@@ -11,6 +11,15 @@ const trust = require('./update-trust');
 
 const ROOT = path.resolve(__dirname, '..', '..', '..');
 
+function localVersion() {
+  try {
+    const file = path.join(__dirname, 'app-version.json');
+    return JSON.parse(fs.readFileSync(file, 'utf8')).version || trust.version;
+  } catch {
+    return trust.version;
+  }
+}
+
 function once(url) {
   return new Promise((resolve, reject) => {
     const request = https.get(url, {
@@ -58,7 +67,7 @@ async function main() {
     fetchText,
     publicKey: trust.publicKey,
     manifestUrl: trust.manifestUrl,
-    localVersion: trust.version,
+    localVersion: localVersion(),
     log: (message) => console.log(message),
   });
 

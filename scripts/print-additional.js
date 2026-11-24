@@ -12,15 +12,9 @@ try {
 const root = path.join(__dirname, '..');
 const out = path.join(root, 'out');
 const dayOrder = ['Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota', 'Niedziela'];
-const configText = fs.readFileSync(path.join(__dirname, 'config.py'), 'utf8');
-const buildingMatch = configText.match(/^BUILDING\s*=\s*['"]([^'"]+)['"]/m);
-if (!buildingMatch) throw new Error('Nie można odczytać BUILDING z scripts/config.py.');
-const building = buildingMatch[1];
-const configValue = (name) =>
-  configText.match(new RegExp(`^${name}\\s*=\\s*['"]([^'"]+)['"]`, 'm'))?.[1] || '';
-const faculty = configValue('FACULTY');
-const semester = configValue('SEMESTER');
-const cardWidth = Number(configText.match(/^CARDW\s*=\s*(\d+)/m)?.[1] || 1400);
+const { loadConfig } = require('./print-config');
+const { building, faculty, semester, cardWidth } = loadConfig(__dirname);
+if (!building) throw new Error('Nie można odczytać BUILDING z scripts/config.py.');
 
 function esc(value) {
   return String(value || '').replace(/[&<>"']/g, (char) => ({

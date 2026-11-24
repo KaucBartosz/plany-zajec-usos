@@ -11,6 +11,7 @@ const { parseManifest } = require('../aplikacja/src/main/update-core');
 
 const root = path.resolve(__dirname, '..');
 const trustPath = path.join(root, 'aplikacja/src/main/update-trust.js');
+const versionPath = path.join(root, 'aplikacja/src/main/app-version.json');
 const manifestPath = path.join(root, 'API.json');
 const apply = process.argv.includes('--apply');
 
@@ -25,23 +26,16 @@ function run(command, args, cwd) {
 }
 
 function main() {
-  let source = fs.readFileSync(trustPath, 'utf8');
-  const current = /version:\s*'([^']+)'/.exec(source)?.[1];
-  if (!current) throw new Error('Nie mogę odczytać wersji z update-trust.js');
+  const current = JSON.parse(fs.readFileSync(versionPath, 'utf8')).version;
+  if (!current) throw new Error('Nie mogę odczytać wersji z app-version.json');
   const version = nextVersion(current);
-  const repo = /raw\.githubusercontent\.com\/([^/]+\/[^/]+)\//.exec(source)?.[1];
-  if (!repo) throw new Error('Nie mogę odczytać repozytorium z update-trust.js');
-
-  source = source.replace(/(version:\s*')[^']+(')/, `$1${version}$2`);
-  source = source.replace(/(fileBaseUrl:\s*')[^']+(')/,
-    `$1https://raw.githubusercontent.com/${repo}/v${version}/$2`);
-  fs.writeFileSync(trustPath, source, 'utf8');
+  fs.writeFileSync(versionPath, JSON.stringify({ version }, null, 2) + '\n', 'utf8');
 
   console.log(run(process.execPath, ['scripts/make_manifest.js'], root).trim());
 
   const manifest = parseManifest(fs.readFileSync(manifestPath, 'utf8'),
     require(trustPath).publicKey);
-  if (manifest.version !== version) throw new Error('Wersja w API.json nie zgadza się z trust');
+  if (manifest.version !== version) throw new Error('Wersja w API.json nie zgadza się z app-version.json');
   console.log(`Podpis manifestu poprawny: ${manifest.version}, plików: ${manifest.files.length}`);
 
   const appDir = path.join(root, 'aplikacja');

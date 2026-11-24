@@ -9,12 +9,20 @@ const path = require('path');
 const crypto = require('crypto');
 const { canonicalJson } = require('../aplikacja/src/main/update-core');
 const trust = require('../aplikacja/src/main/update-trust');
+const appVersion = require('../aplikacja/src/main/app-version.json');
 
 const ROOT = path.resolve(__dirname, '..');
+
+function baseUrl() {
+  const repo = /raw\.githubusercontent\.com\/([^/]+\/[^/]+)\//.exec(trust.manifestUrl)?.[1];
+  if (!repo) throw new Error('Nie mogę odczytać repozytorium z update-trust.js');
+  return `https://raw.githubusercontent.com/${repo}/v${appVersion.version}/`;
+}
 
 const MANAGED = [
   'INSTRUKCJA.md',
   'check-changes.cmd',
+  'launcher.cmd',
   'drukuj-grupy-weekend.cmd',
   'drukuj-sale-pon-pt.cmd',
   'package.json',
@@ -29,13 +37,18 @@ const MANAGED = [
   'scripts/build_rooms.py',
   'scripts/build_sheets.py',
   'scripts/check_conflicts.py',
+  'scripts/config_default.py',
+  'scripts/css.py',
   'scripts/fetch.py',
   'scripts/fetch_week_pon_pt.py',
+  'scripts/groups_default.py',
   'scripts/make_manifest.js',
   'scripts/make_runall.js',
   'scripts/pipeline.json',
   'scripts/parse.py',
   'scripts/print-additional.js',
+  'scripts/print-config.js',
+  'scripts/print_default.css',
   'scripts/release.js',
   'scripts/sheets.js',
   'scripts/shot_rooms.js',
@@ -44,8 +57,10 @@ const MANAGED = [
   'aplikacja/README.md',
   'aplikacja/PLAN.md',
   'aplikacja/package.json',
+  'aplikacja/src/main/app-version.json',
   'aplikacja/src/main/export-template.js',
   'aplikacja/src/main/export.js',
+  'aplikacja/src/main/print-css.js',
   'aplikacja/src/main/main.js',
   'aplikacja/src/main/preload.js',
   'aplikacja/src/main/update-core.js',
@@ -60,6 +75,7 @@ const MANAGED = [
   'aplikacja/test/export-template.test.js',
   'aplikacja/test/filters.test.js',
   'aplikacja/test/pipeline.test.js',
+  'aplikacja/test/print-config.test.js',
   'aplikacja/test/status.test.js',
   'aplikacja/test/update-core.test.js',
   'aplikacja/test/views.test.js',
@@ -105,10 +121,10 @@ function main() {
 
   const unsigned = {
     schema: 1,
-    version: trust.version,
+    version: appVersion.version,
     publishedAt: new Date().toISOString(),
     minRuntime: trust.minRuntime,
-    base: trust.fileBaseUrl,
+    base: baseUrl(),
     files,
   };
   const sig = crypto.sign(null, Buffer.from(canonicalJson(unsigned), 'utf8'), privateKey)

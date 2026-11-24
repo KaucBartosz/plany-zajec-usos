@@ -1,13 +1,13 @@
 {
   "schema": 1,
-  "version": "2026.11.24-6",
-  "publishedAt": "2026-11-24T12:49:24.770Z",
+  "version": "2026.11.24-7",
+  "publishedAt": "2026-11-24T13:04:39.386Z",
   "minRuntime": {
     "python": "3.10",
     "node": "18",
     "electron": "37"
   },
-  "base": "https://raw.githubusercontent.com/KaucBartosz/plany-zajec-usos/v2026.11.24-6/",
+  "base": "https://raw.githubusercontent.com/KaucBartosz/plany-zajec-usos/v2026.11.24-7/",
   "files": [
     {
       "path": "aplikacja/package.json",
@@ -28,6 +28,12 @@
       "mode": "managed"
     },
     {
+      "path": "aplikacja/src/main/app-version.json",
+      "sha256": "65bf491abb0274b710918761f5136716939e99bb866cd4cf457abcc81fad4331",
+      "bytes": 32,
+      "mode": "managed"
+    },
+    {
       "path": "aplikacja/src/main/export-template.js",
       "sha256": "926cc0747efef82b36228c752c18a007a369240fd8ed0bcba631605928c5b9d9",
       "bytes": 7508,
@@ -35,8 +41,8 @@
     },
     {
       "path": "aplikacja/src/main/export.js",
-      "sha256": "eb1d93f5952ded57383e2260f33228fb5f59ca090da9354c51c6405cf3002537",
-      "bytes": 5170,
+      "sha256": "0aea3bb72115e012c5db1f66673e233bf1e78d5725fb2c4f7241ca99c533b836",
+      "bytes": 5173,
       "mode": "managed"
     },
     {
@@ -52,6 +58,12 @@
       "mode": "managed"
     },
     {
+      "path": "aplikacja/src/main/print-css.js",
+      "sha256": "85d442bc5c99e514dc3e47dd7d7f2aaf514fd24968102f9db0e881b2ea8ebcac",
+      "bytes": 432,
+      "mode": "managed"
+    },
+    {
       "path": "aplikacja/src/main/update-core.js",
       "sha256": "dab197a34c5aa817356e05140ae2ca9663a7f7990a24f9e7404d133063c220bc",
       "bytes": 7933,
@@ -59,14 +71,14 @@
     },
     {
       "path": "aplikacja/src/main/update-trust.js",
-      "sha256": "67645ede4e4798ca4fee4bcfdaf1ffed5664d027e34302c3ec1e002d4e88f9cd",
-      "bytes": 694,
+      "sha256": "9244fb55d31629bb51d885869b2f7bca2df79a56c6b0e044e0b53616f5bf2dd8",
+      "bytes": 517,
       "mode": "local"
     },
     {
       "path": "aplikacja/src/main/update.js",
-      "sha256": "426461b3e98e72a36c091da3892ac4c31ef1c3ced3be7e68ee1a8077312dd8e8",
-      "bytes": 3371,
+      "sha256": "c85bf85a6c6c6d29e8149a09bc9ba04d22b30da12054d8ff0fb869a59e46b6d0",
+      "bytes": 3589,
       "mode": "managed"
     },
     {
@@ -130,6 +142,12 @@
       "mode": "managed"
     },
     {
+      "path": "aplikacja/test/print-config.test.js",
+      "sha256": "8d46f3080b670d1e8eacfe0d9e1e5d855031b7f5d995c2fb4d67d51c51704083",
+      "bytes": 1121,
+      "mode": "managed"
+    },
+    {
       "path": "aplikacja/test/status.test.js",
       "sha256": "0d2fc0c9476198e2d21bf11ecc919e272c33eb867be421ca370b12265f6b2ec8",
       "bytes": 766,
@@ -167,8 +185,14 @@
     },
     {
       "path": "INSTRUKCJA.md",
-      "sha256": "7e304c44352adae45f8d687dac3339eea9551107c54a3823002cf5dc9d0f363d",
-      "bytes": 24470,
+      "sha256": "fb847f1004dee2841bd634cf608f34acf45fdb9296de638db196a7a858abb174",
+      "bytes": 24906,
+      "mode": "managed"
+    },
+    {
+      "path": "launcher.cmd",
+      "sha256": "b48379200b7627a285bd1ebcf09b2bd07fb5d1dcec67812b115d9ea87f6f1dda",
+      "bytes": 628,
       "mode": "managed"
     },
     {
@@ -185,8 +209,8 @@
     },
     {
       "path": "plans/README.md",
-      "sha256": "972296aaef6ea68a1b3a9cb11ee0704969f512b8a2b8a6f289e8b349c3a7961e",
-      "bytes": 1790,
+      "sha256": "afda11bff61b937f7922715bb78c9e975ac4c99bdb6dedd537592fbc986f7c20",
+      "bytes": 1806,
       "mode": "managed"
     },
     {
@@ -203,14 +227,14 @@
     },
     {
       "path": "scripts/build_rooms.py",
-      "sha256": "051f5534d4f0b139a080d1e7ad193d57ded1ca5dd15c682359ecb6f11c6904f0",
-      "bytes": 12510,
+      "sha256": "a857878fcf38b9f0e0a832fd5fa384796e7d4714542719a1a610bdd14d8db861",
+      "bytes": 12448,
       "mode": "managed"
     },
     {
       "path": "scripts/build_sheets.py",
-      "sha256": "e98babfb71bee67696e3cb016502055182ec76f8ec232dc725f4391b4910855f",
-      "bytes": 5022,
+      "sha256": "1273535d05cd1b99c1ae3c2d544339cf0938e40e405800ac8df21665f75cffaf",
+      "bytes": 4960,
       "mode": "managed"
     },
     {
@@ -220,10 +244,22 @@
       "mode": "managed"
     },
     {
-      "path": "scripts/config.py",
+      "path": "scripts/config_default.py",
       "sha256": "b919cc1777108b781ce515bea900f8baca6f51e7562e8b5c04b02d3fc195ad4b",
       "bytes": 1316,
+      "mode": "managed"
+    },
+    {
+      "path": "scripts/config.py",
+      "sha256": "4175763985e954d05af281f8d53ca0e37e09b2222d1da745366cfb8148c4c4fb",
+      "bytes": 263,
       "mode": "local"
+    },
+    {
+      "path": "scripts/css.py",
+      "sha256": "8b907a509935ad82cca117fd742524c1559e2c33161e93437e6664c2455a48a1",
+      "bytes": 372,
+      "mode": "managed"
     },
     {
       "path": "scripts/fetch_week_pon_pt.py",
@@ -238,15 +274,21 @@
       "mode": "managed"
     },
     {
-      "path": "scripts/groups.py",
+      "path": "scripts/groups_default.py",
       "sha256": "8831aafe191fd7b5e7fafa7d69c56791320156e7b4d59b50741f317f68aa803f",
       "bytes": 3669,
+      "mode": "managed"
+    },
+    {
+      "path": "scripts/groups.py",
+      "sha256": "889e9a63e434c91f14dacb53b57cc1832326e4a28ec1413a72ea1d72779dfadb",
+      "bytes": 348,
       "mode": "local"
     },
     {
       "path": "scripts/make_manifest.js",
-      "sha256": "503768e6dbc43e453d8a8b84ffd6a6a089dfc8844f4790de22cd64327915b022",
-      "bytes": 3905,
+      "sha256": "c417bd1ce235bd9aeaa994f188154e2de075039cc1dcbdf34fc2651628948002",
+      "bytes": 4530,
       "mode": "managed"
     },
     {
@@ -268,21 +310,33 @@
       "mode": "managed"
     },
     {
+      "path": "scripts/print_default.css",
+      "sha256": "c352f5a3394047e5c7a444c79aaa966583d71e30243fc481b06195795a1c1566",
+      "bytes": 5151,
+      "mode": "managed"
+    },
+    {
       "path": "scripts/print-additional.js",
-      "sha256": "d94ecd4502bd3269086f968dd10ac10b0bb54b0210b9b5ca07c0d16b74bce211",
-      "bytes": 15578,
+      "sha256": "84897a8aad73600f82b352465447a888adefdf139a87c644d261db2acad3a2d4",
+      "bytes": 15223,
+      "mode": "managed"
+    },
+    {
+      "path": "scripts/print-config.js",
+      "sha256": "72a096c421b35d45c5d68a13604875d53182e47c595ec74526b1e9608efb4f58",
+      "bytes": 938,
       "mode": "managed"
     },
     {
       "path": "scripts/print.css",
-      "sha256": "c352f5a3394047e5c7a444c79aaa966583d71e30243fc481b06195795a1c1566",
-      "bytes": 5151,
+      "sha256": "9d6301b0db767adb40fec0ea0e0af99bbf7adf4588cc2a921865810f0c1bc6b4",
+      "bytes": 187,
       "mode": "local"
     },
     {
       "path": "scripts/release.js",
-      "sha256": "8ebc210e6016b3e1774b48c26e403d652aecf260ceaa0fdfadc57e71e554e77e",
-      "bytes": 3175,
+      "sha256": "23e6ff1917b6f441ad78221e7d79c96ecfeb27632ca95515c1bf31b0e1e1f29b",
+      "bytes": 2906,
       "mode": "managed"
     },
     {
@@ -359,10 +413,10 @@
     },
     {
       "path": "URUCHOM.cmd",
-      "sha256": "b48379200b7627a285bd1ebcf09b2bd07fb5d1dcec67812b115d9ea87f6f1dda",
-      "bytes": 628,
+      "sha256": "0d8eadd97660ffdc3ae96b24e9cbc518d71e7ccaeecd12d7a1f8a790ad48d6f3",
+      "bytes": 56,
       "mode": "local"
     }
   ],
-  "sig": "06omj1162h3LwaXVJAQ9LH32CGTxbaXibMK+1hbF8Zgmteq+sD+Dx460qHqF9It23+bagrp2oJKREJDRYR10Bg=="
+  "sig": "f7vME6/dwSmENzki1JX2eT2WKjAgMsYgtzHIMhbbaWWQNI+pvFzs81/8HR3HtxGyvLKYNzWIszWgdmJWBvydDA=="
 }

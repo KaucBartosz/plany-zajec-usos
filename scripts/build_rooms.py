@@ -16,13 +16,12 @@ import unicodedata
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import config  # noqa: E402
+from css import load_print_css  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = ROOT
 CARD_DIR = os.path.join(BASE, 'out')
-with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'print.css'),
-          encoding='utf-8') as f:
-    SHARED_CSS = f.read()
+SHARED_CSS = load_print_css(BASE)
 
 with open(os.path.join(BASE, 'plan.json'), encoding='utf-8') as f:
     data = json.load(f)
