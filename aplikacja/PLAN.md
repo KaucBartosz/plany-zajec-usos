@@ -61,6 +61,13 @@ uwagi (`note`), surowe `info`.
 Klucze pól: `day`, `time`, `course`, `code`, `type`, `group`, `room`, `teacher`,
 `event`, `note`, `info`. `time` jest polem wirtualnym (`start–end`).
 
+Panel pokazuje tylko przełączniki pól, które dany widok rzeczywiście
+kontroluje (`app.js → VIEW_COLUMNS`): tabela — wszystkie; karty grup — `time`,
+`course`, `teacher`, `code`, `event`, `note`; plansza sali — `time`, `type`,
+`course`, `code`, `group`, `teacher`, `event`, `note`. Pozostałe pola są
+nagłówkiem kolumny, tytułem karty albo treścią stałą dla widoku. Lista
+odświeża się przy zmianie widoku; zapisane wybory nie są tracone.
+
 ## 5. Architektura
 
 ```

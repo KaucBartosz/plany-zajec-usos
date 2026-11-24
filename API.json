@@ -1,13 +1,13 @@
 {
   "schema": 1,
-  "version": "2026.11.24-4",
-  "publishedAt": "2026-11-24T12:30:21.917Z",
+  "version": "2026.11.24-5",
+  "publishedAt": "2026-11-24T12:40:05.968Z",
   "minRuntime": {
     "python": "3.10",
     "node": "18",
     "electron": "37"
   },
-  "base": "https://raw.githubusercontent.com/KaucBartosz/plany-zajec-usos/v2026.11.24-4/",
+  "base": "https://raw.githubusercontent.com/KaucBartosz/plany-zajec-usos/v2026.11.24-5/",
   "files": [
     {
       "path": "aplikacja/package.json",
@@ -17,8 +17,8 @@
     },
     {
       "path": "aplikacja/PLAN.md",
-      "sha256": "05cd6d9fb8a435878bacdf9095e03198f5f679dc0b08fd5a35d65521be8bca99",
-      "bytes": 10932,
+      "sha256": "80ec066b4ca94b547485fd33125971fc2f6989a39f5aff35403a332d938303a5",
+      "bytes": 11394,
       "mode": "managed"
     },
     {
@@ -59,7 +59,7 @@
     },
     {
       "path": "aplikacja/src/main/update-trust.js",
-      "sha256": "6c49449781944ec40357f65f36e1d4e43d821f7018c7ed299cdf3335eccf8057",
+      "sha256": "aa551b822c9493636704ee17a76b8194c040c8538aab56d8860b85f3d505f933",
       "bytes": 694,
       "mode": "local"
     },
@@ -71,8 +71,8 @@
     },
     {
       "path": "aplikacja/src/renderer/app.js",
-      "sha256": "2266a7a870f24ad2ac105b3c9b1bf16055ef1dbfecd26233b8996c26f6de7679",
-      "bytes": 32763,
+      "sha256": "bd3609f6ebcb3fa2c03d3094f1aeac1eb8028701539b00a19293bedc60ca5f76",
+      "bytes": 33244,
       "mode": "managed"
     },
     {
@@ -346,5 +346,5 @@
       "mode": "local"
     }
   ],
-  "sig": "tssx5w7MBxO4p4jTnTVAyQGIGrHED0rhAGBpVYyg8u1JDNYbJthRLPTH6DPwqW4Mg9ySbEc1qEsd/wSZ0Cz2Bg=="
+  "sig": "X1Ki6wviND0QPsfaJ5/0F3M6Slm/2YOKNNwbKe/qCjldIdI855unrAQqybcauP3Opw1gESiLDrgWL1U41UaoAw=="
 }

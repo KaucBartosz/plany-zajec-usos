@@ -12,6 +12,14 @@ const FIELD_LABELS = {
   note: 'Uwagi', info: 'Info z USOS',
 };
 
+// Pola, których przełącznik realnie zmienia dany widok. Pozostałe to nagłówek
+// kolumny, tytuł karty albo treść pokazywana niezależnie od flagi.
+const VIEW_COLUMNS = {
+  table: FIELD_KEYS,
+  groups: ['time', 'course', 'teacher', 'code', 'event', 'note'],
+  rooms: ['time', 'type', 'course', 'code', 'group', 'teacher', 'event', 'note'],
+};
+
 const state = {
   data: null,
   view: 'groups',
@@ -195,10 +203,10 @@ function renderFilters() {
     ${checkboxGroup('Numer grupy', 'groupNumbers', options.groupNumbers)}
     ${checkboxGroup('Dzień', 'days', options.days)}
     ${checkboxGroup('Typ zajęć', 'types', options.types)}
-    ${section('visible', 'Widoczne kolumny', FIELD_KEYS.map((key) => {
+    ${section('visible', 'Widoczne kolumny', (VIEW_COLUMNS[state.view] || FIELD_KEYS).map((key) => {
       const checked = state.visible.has(key) ? ' checked' : '';
       return `<label class="opt"><input type="checkbox" data-visible="${key}"${checked}> <span>${FIELD_LABELS[key]}</span></label>`;
-    }).join(''))}
+    }).join('') + '<p class="hint">Pozostałe pola są stałymi elementami tego widoku.</p>')}
   `;
 }
 
@@ -432,6 +440,7 @@ document.addEventListener('change', (event) => {
     renderResults();
   } else if (target.name === 'view') {
     state.view = target.value;
+    renderFilters();
     renderResults();
   } else if (target.id === 'weekend-only') {
     state.criteria.weekendOnly = target.checked;
