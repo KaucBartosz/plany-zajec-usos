@@ -86,12 +86,17 @@ folder" otwiera katalog z wynikami.
 
 ## Pobieranie danych
 
-Zakładka „Pobieranie danych" uruchamia pełny przebieg: `fetch.py`,
-`fetch_week_pon_pt.py`, `parse.py`, `build_rooms.py`, `shot_rooms.js`,
-`build_sheets.py`, `sheets.js`, `to_pdf.py` i `verify.py`. Dzięki temu po
-odświeżeniu gotowy PDF w `out/a4/pdf/` jest aktualny, a nie sprzed zmian
-w USOS. Log i pasek postępu pokazują bieżący krok; dane w zakładce „Plan"
-ładują się ponownie po zakończeniu.
+Zakładka „Pobieranie danych" ma dwie fazy zdefiniowane w
+`scripts\pipeline.json`. Faza „Pobieranie danych" używa `fetch.py
+--only-changed`, `fetch_week_pon_pt.py --only-changed` i `parse.py` — zapisuje
+tylko pliki HTML, których hash się zmienił. Faza „Wydruki" startuje automatycznie
+po udanej fazie danych i buduje plansze sal, PNG, kartki A4, PDF, wydruk grup i
+kontrolę jakości. Gdy nie ma nowych danych, obie fazy są pomijane. Przycisk
+„Ponów wydruki" uruchamia samą fazę wydruków, np. po jej wcześniejszym błędzie.
+
+Log i pasek postępu pokazują numer fazy i bieżący krok. Znaczniki czasu
+znajdują się w `out\stan.json`; pasek statusu informuje, gdy wydruki są starsze
+niż dane. Dane w zakładce „Plan" ładują się ponownie po zakończeniu.
 
 Ręcznie, bez aplikacji, pobranie planu na bieżący tydzień (Pon–Pt)
 dla grup stacjonarnych:

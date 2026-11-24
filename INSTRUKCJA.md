@@ -69,6 +69,20 @@ Pozostałe skrypty (`run-all.cmd`, `test.cmd`, `check-changes.cmd`,
 `drukuj-*.cmd`, `sprawdz-kolizje.cmd`) same wczytują ustawienia z
 `runtime\_env.cmd`, więc działają także bez systemowych runtime'ów.
 
+**Odświeżanie danych i wydruki to dwie fazy.** Lista kroków jest w jednym
+pliku, `scripts\pipeline.json`; `run-all.cmd` jest z niego generowany
+(`node scripts\make_runall.js`). Kliknięcie „Rozpocznij pobieranie" w aplikacji
+uruchamia najpierw fazę danych (`fetch.py --only-changed`,
+`fetch_week_pon_pt.py --only-changed`, `parse.py`), a po niej — automatycznie —
+fazę wydruków (plansze sal, PNG, kartki A4, PDF, wydruk grup i `verify.py`).
+Tryb `--only-changed` pobiera strony z USOS, ale zapisuje tylko te, których
+hash się zmienił. Gdy raport `html\week\changes.json` nie pokazuje zmian,
+parsowanie i wydruki są pomijane. Fazę wydruków można uruchomić osobno
+przyciskiem „Ponów wydruki". Znaczniki czasu obu faz trafiają do
+`out\stan.json`, więc pasek statusu pokazuje, kiedy dane były pobrane i czy
+wydruki są aktualne. `fetch.py --check` pozostaje osobnym, tylko raportującym
+kanałem i nie nadpisuje danych.
+
 ### Klasyczne uruchomienie (gdy system ma Python i Node)
 
 ```powershell
@@ -463,6 +477,7 @@ są — skrypt nie jest częścią `run-all.cmd`, żeby nie przerywać wydruku.
 | wygląd kartki A4 | `scripts/build_sheets.py` | `CSS`, `SHEET_HEAD` |
 | jakość renderu | `scripts/shot_rooms.js`, `scripts/sheets.js` | `deviceScaleFactor` (3 = 3x) |
 | format PDF | `scripts/to_pdf.py` + `config.py` | `PDF_W`, `PDF_H`, `PDF_DPI` |
+| listę kroków pobierania i wydruków | `scripts/pipeline.json` | fazy `data` i `build`; `run-all.cmd` generuje `make_runall.js` |
 | listę plików aktualizowanych z GitHub | `scripts/make_manifest.js` | `MANAGED`, `LOCAL` (hash + podpis trafiają do `API.json`) |
 | adres repo i klucz publiczny | `aplikacja/src/main/update-trust.js` | `manifestUrl`, `publicKey` (klucz prywatny poza repo) |
 | wyłączenie autoaktualizacji | zmienna `PLANER_NO_UPDATE=1` | aktualizator nie jest wywoływany |

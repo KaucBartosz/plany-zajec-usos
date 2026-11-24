@@ -26,20 +26,17 @@ function childEnv() {
   return env;
 }
 
-const FETCH_STEPS = [
-  { label: 'Plany semestralne i tydzień (USOS)', script: 'fetch.py', exe: 'python' },
-  { label: 'Bieżący tydzień Pon–Pt', script: 'fetch_week_pon_pt.py', exe: 'python' },
-  { label: 'Parsowanie danych', script: 'parse.py', exe: 'python' },
-  { label: 'Plansze sal', script: 'build_rooms.py', exe: 'python' },
-  { label: 'PNG sal', script: 'shot_rooms.js', exe: 'node' },
-  { label: 'Kartki A4', script: 'build_sheets.py', exe: 'python' },
-  { label: 'PNG kartek A4', script: 'sheets.js', exe: 'node' },
-  { label: 'PDF do druku', script: 'to_pdf.py', exe: 'python' },
-  { label: 'Kontrola jakości', script: 'verify.py', exe: 'python' },
-];
+const PIPELINE = JSON.parse(fs.readFileSync(
+  path.join(DATA_ROOT, 'scripts', 'pipeline.json'), 'utf8'));
+const CHANGES_FILE = path.join(DATA_ROOT, 'html', 'week', 'changes.json');
+const STATUS_FILE = path.join(DATA_ROOT, 'out', 'stan.json');
 
 let fetchProcess = null;
 let fetchCancelled = false;
+let activePhases = [];
+let phaseIndex = 0;
+let completedSteps = 0;
+let totalSteps = 0;
 
 function sendLine(sender, text, label) {
   const progress = text.match(/\[(?:tydz\.\s*)?(\d+)\s*\/\s*(\d+)\]/);
@@ -51,20 +48,87 @@ function sendLine(sender, text, label) {
   });
 }
 
-function runFetchStep(sender, index) {
-  if (index >= FETCH_STEPS.length) {
-    fetchProcess = null;
-    sender.send('fetch:done', { code: 0 });
+function fetchChanges() {
+  try {
+    const report = JSON.parse(fs.readFileSync(CHANGES_FILE, 'utf8'));
+    return [...new Set([
+      ...(report.semester || []),
+      ...(report.changed || []).map((item) => item.key || item),
+    ])].filter(Boolean);
+  } catch {
+    return [];
+  }
+}
+
+function writeStatus(patch) {
+  let status = {};
+  try {
+    status = JSON.parse(fs.readFileSync(STATUS_FILE, 'utf8'));
+  } catch {
+    status = {};
+  }
+  fs.mkdirSync(path.dirname(STATUS_FILE), { recursive: true });
+  fs.writeFileSync(STATUS_FILE, JSON.stringify({ ...status, ...patch }, null, 1), 'utf8');
+}
+
+function finish(sender, code, extra) {
+  fetchProcess = null;
+  sender.send('fetch:done', { code, ...(extra || {}) });
+}
+
+function phaseFinished(sender, code) {
+  const phase = activePhases[phaseIndex];
+  if (code !== 0) {
+    finish(sender, code, { phase: phase.id });
     return;
   }
+  if (phase.id === 'data') {
+    const changes = fetchChanges();
+    writeStatus({ dataFetchedAt: new Date().toISOString(), changes });
+    if (!changes.length) {
+      sender.send('fetch:progress', {
+        type: 'log', text: 'Brak nowych danych — wydruki nie zostały przebudowane.',
+        label: phase.label,
+      });
+      finish(sender, 0, { noChanges: true });
+      return;
+    }
+  } else if (phase.id === 'build') {
+    writeStatus({ buildFinishedAt: new Date().toISOString() });
+  }
+  if (phaseIndex + 1 < activePhases.length) {
+    phaseIndex++;
+    const next = activePhases[phaseIndex];
+    sender.send('fetch:phase', {
+      phase: next.id, label: next.label, index: phaseIndex + 1, total: activePhases.length,
+    });
+    runStep(sender, next, 0);
+    return;
+  }
+  finish(sender, 0);
+}
 
-  const step = FETCH_STEPS[index];
-  sender.send('fetch:progress', { type: 'step', label: step.label, current: index + 1, total: FETCH_STEPS.length });
-
-  const child = spawn(bundled(step.exe || 'python'), [path.join(DATA_ROOT, 'scripts', step.script)], {
-    cwd: DATA_ROOT,
-    env: childEnv(),
+function runStep(sender, phase, index) {
+  if (index >= phase.steps.length) {
+    phaseFinished(sender, 0);
+    return;
+  }
+  const step = phase.steps[index];
+  if (phase.id === 'data' && step.script === 'parse.py' && !fetchChanges().length) {
+    sender.send('fetch:progress', {
+      type: 'log', text: 'Brak nowych danych — pomijam parsowanie.', label: phase.label,
+    });
+    completedSteps++;
+    runStep(sender, phase, index + 1);
+    return;
+  }
+  sender.send('fetch:progress', {
+    type: 'step', label: step.label,
+    current: completedSteps + index + 1, total: totalSteps,
   });
+  const child = spawn(bundled(step.exe || 'python'),
+    [path.join(DATA_ROOT, 'scripts', step.script), ...(step.args || [])],
+    { cwd: DATA_ROOT, env: childEnv() });
   fetchProcess = child;
 
   let buffer = '';
@@ -86,15 +150,29 @@ function runFetchStep(sender, index) {
     if (buffer.trim()) sendLine(sender, buffer, step.label);
     fetchProcess = null;
     if (fetchCancelled) {
-      sender.send('fetch:done', { code: -1, cancelled: true, step: step.label });
+      sender.send('fetch:done', { code: -1, cancelled: true, step: step.label, phase: phase.id });
       return;
     }
     if (code !== 0) {
-      sender.send('fetch:done', { code, step: step.label });
+      sender.send('fetch:done', { code, step: step.label, phase: phase.id });
       return;
     }
-    runFetchStep(sender, index + 1);
+    completedSteps++;
+    runStep(sender, phase, index + 1);
   });
+}
+
+function runPhases(sender, ids) {
+  activePhases = PIPELINE.phases.filter((phase) => ids.includes(phase.id));
+  phaseIndex = 0;
+  completedSteps = 0;
+  totalSteps = activePhases.reduce((sum, phase) => sum + phase.steps.length, 0);
+  fetchCancelled = false;
+  const first = activePhases[0];
+  sender.send('fetch:phase', {
+    phase: first.id, label: first.label, index: 1, total: activePhases.length,
+  });
+  runStep(sender, first, 0);
 }
 
 function createWindow() {
@@ -130,8 +208,12 @@ ipcMain.handle('export:openDir', () =>
   shell.openPath(path.join(DATA_ROOT, 'out', 'eksport')));
 ipcMain.handle('fetch:start', (event) => {
   if (fetchProcess) return { started: false, error: 'Pobieranie już trwa.' };
-  fetchCancelled = false;
-  runFetchStep(event.sender, 0);
+  runPhases(event.sender, ['data', 'build']);
+  return { started: true };
+});
+ipcMain.handle('fetch:startBuild', (event) => {
+  if (fetchProcess) return { started: false, error: 'Pobieranie już trwa.' };
+  runPhases(event.sender, ['build']);
   return { started: true };
 });
 ipcMain.handle('fetch:cancel', () => {

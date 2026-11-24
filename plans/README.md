@@ -9,6 +9,7 @@ przestrzegaj warunków STOP i zaktualizuj swój wiersz po zakończeniu.
 | Plan | Tytuł | Priorytet | Nakład | Zależy od | Status |
 |------|-------|-----------|--------|-----------|--------|
 | 001  | Aplikacja aktualizuje swój kod z publicznego repozytorium GitHub | P1 | L | — | BLOCKED (kod gotowy; krok 8 — publikacja repo i tagu — po stronie operatora) |
+| 002  | Osobne fazy pobierania danych i budowy wydruków | P1 | L | 001 | DONE |
 
 Statusy: TODO | IN PROGRESS | DONE | BLOCKED (powód w jednym wierszu) |
 REJECTED (powód w jednym wierszu).

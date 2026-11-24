@@ -11,6 +11,7 @@ Użycie:
     python fetch.py              # pobierz wszystkie grupy
     python fetch.py --only SJ-I  # tylko jedna grupa
     python fetch.py --check      # sprawdź zmiany; osobny raport dla planów tygodniowych
+    python fetch.py --only-changed  # zapisz tylko pliki, których hash się zmienił
 """
 import argparse
 import datetime
@@ -119,7 +120,10 @@ def main():
                     help='tylko wybrane grupy, np. --only SJ-I --only NJ-II')
     ap.add_argument('--check', action='store_true',
                     help='porównaj plany; zapisz osobny raport wariantu tygodniowego')
+    ap.add_argument('--only-changed', action='store_true',
+                    help='zapisz tylko pliki, których hash się zmienił')
     args = ap.parse_args()
+    only_changed = args.only_changed
 
     targets = GROUPS
     if args.only:
@@ -161,15 +165,20 @@ def main():
                 changed.append(g['key'])
             continue
 
-        with open(path, 'w', encoding='utf-8', newline='\n') as f:
-            f.write(html)
+        if only_changed and same:
+            print(f'{label} {len(html) // 1024:>5} kB  (bez zmian)')
+        else:
+            if not same:
+                changed.append(g['key'])
+            with open(path, 'w', encoding='utf-8', newline='\n') as f:
+                f.write(html)
+            print(f'{label} {len(html) // 1024:>5} kB  zapisano')
         manifest[g['key']] = {
             'sha256': digest,
             'bytes': len(html.encode('utf-8')),
             'url': url,
             'fetched': datetime.datetime.now().isoformat(timespec='seconds'),
         }
-        print(f'{label} {len(html) // 1024:>5} kB  {"(bez zmian)" if same else "zapisano"}')
 
     week_changed, week_initialized, week_failed = [], [], []
     for i, g in enumerate(week_targets, 1):
@@ -215,9 +224,15 @@ def main():
                 })
             continue
 
-        os.makedirs(WEEK_HTML, exist_ok=True)
-        with open(path, 'w', encoding='utf-8', newline='\n') as f:
-            f.write(html)
+        if not only_changed or not same:
+            os.makedirs(WEEK_HTML, exist_ok=True)
+            with open(path, 'w', encoding='utf-8', newline='\n') as f:
+                f.write(html)
+            if not same:
+                week_changed.append({
+                    'key': g['key'], 'url': url,
+                    'previous_sha256': old, 'sha256': digest,
+                })
         week_manifest[g['key']] = {
             'sha256': digest,
             'bytes': len(html.encode('utf-8')),
@@ -241,12 +256,13 @@ def main():
 
     if failed:
         print(f'\nBŁĘDY: {len(failed)} — {", ".join(failed)}')
-    if args.check:
+    if args.check or only_changed:
         checked = datetime.datetime.now().isoformat(timespec='seconds')
         os.makedirs(WEEK_HTML, exist_ok=True)
         save_json(WEEK_CHANGES, {
             'checked': checked,
             'changed': week_changed,
+            'semester': changed,
             'baseline_initialized': week_initialized,
             'failed': week_failed,
         })
@@ -263,15 +279,16 @@ def main():
         if not changed and not week_changed and not failed:
             print(f'\nWszystkie {len(targets)} planów bazowych i '
                   f'{len(week_targets)} wariantów tygodniowych bez zmian.')
-        if changed:
-            print('Uruchom `python scripts\\fetch.py`, potem `python scripts\\parse.py` '
-                  'i dalsze kroki.')
-        elif week_changed:
-            print(f'Zmiany wariantu tygodniowego zachowano w {WEEK_CHANGES}; '
-                  'plany semestralne nie wymagają przebudowy.')
-        if changed or week_changed or failed:
-            return 1
-    elif failed:
+        if args.check:
+            if changed:
+                print('Uruchom `python scripts\\fetch.py`, potem `python scripts\\parse.py` '
+                      'i dalsze kroki.')
+            elif week_changed:
+                print(f'Zmiany wariantu tygodniowego zachowano w {WEEK_CHANGES}; '
+                      'plany semestralne nie wymagają przebudowy.')
+            if changed or week_changed or failed:
+                return 1
+    if failed:
         return 1
     return 0
 

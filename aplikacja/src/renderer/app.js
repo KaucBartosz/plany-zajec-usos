@@ -478,8 +478,13 @@ async function load() {
   }
   try {
     state.data = await window.planerApi.loadData();
-    const { semesterCount, weekCount } = state.data.meta;
-    $('#status').textContent = `Dane: ${semesterCount} zajęć w semestrze, ${weekCount} w bieżącym tygodniu.`;
+    const { semesterCount, weekCount, dataFetchedAt, buildFinishedAt } = state.data.meta;
+    let statusText = `Dane: ${semesterCount} zajęć w semestrze, ${weekCount} w bieżącym tygodniu.`;
+    if (dataFetchedAt) statusText += ` · pobrano ${dataFetchedAt.slice(0, 16).replace('T', ' ')}`;
+    if (dataFetchedAt && (!buildFinishedAt || buildFinishedAt < dataFetchedAt)) {
+      statusText += ' · wydruki nieaktualne';
+    }
+    $('#status').textContent = statusText;
     renderFilters();
     renderResults();
   } catch (error) {
@@ -520,10 +525,11 @@ function setProgress(current, total, label) {
   $('#progress-label').textContent = `${label}: ${current}/${total} (${percent}%)`;
 }
 
-async function startFetch() {
+async function startFetchMode(start) {
   if (fetchRunning) return;
   fetchRunning = true;
   $('#start-fetch').disabled = true;
+  $('#ponow-wydruki').disabled = true;
   $('#stop-fetch').disabled = false;
   $('#fetch-log').textContent = '';
   const bar = $('#progress-bar');
@@ -532,22 +538,37 @@ async function startFetch() {
   $('#progress-track').setAttribute('aria-valuenow', '0');
   $('#progress-label').textContent = 'Łączenie z USOS…';
   try {
-    const result = await window.planerApi.startFetch();
+    const result = await start();
     if (!result.started) {
       appendLog(result.error || 'Nie udało się rozpocząć pobierania.', 'error');
       fetchRunning = false;
       $('#start-fetch').disabled = false;
       $('#stop-fetch').disabled = true;
+      $('#ponow-wydruki').disabled = false;
     }
   } catch (error) {
     appendLog(error.message, 'error');
     fetchRunning = false;
     $('#start-fetch').disabled = false;
     $('#stop-fetch').disabled = true;
+    $('#ponow-wydruki').disabled = false;
   }
 }
 
+function startFetch() {
+  return startFetchMode(() => window.planerApi.startFetch());
+}
+
+function startBuild() {
+  return startFetchMode(() => window.planerApi.startBuild());
+}
+
 if (window.planerApi) {
+  window.planerApi.onFetchPhase((payload) => {
+    appendLog(`== Faza ${payload.index}/${payload.total}: ${payload.label}`);
+    $('#progress-label').textContent = `Faza ${payload.index}/${payload.total}: ${payload.label}`;
+  });
+
   window.planerApi.onFetchProgress((payload) => {
     if (payload.type === 'step') {
       appendLog(`== ${payload.label} (${payload.current}/${payload.total})`);
@@ -571,16 +592,20 @@ if (window.planerApi) {
       appendLog(`Pobieranie przerwane: ${result.step || 'bieżący krok'}`, 'error');
     } else if (result.code === 0) {
       bar.style.width = '100%';
-      $('#progress-label').textContent = 'Zakończono. Dane odświeżone.';
+      $('#progress-label').textContent = result.noChanges
+        ? 'Brak nowych danych.' : 'Zakończono. Dane i wydruki odświeżone.';
+      $('#ponow-wydruki').disabled = false;
       await load();
     } else {
-      $('#progress-label').textContent = `Zakończono z błędem (kod ${result.code}${result.step ? ', ' + result.step : ''}).`;
+      $('#ponow-wydruki').disabled = false;
+      $('#progress-label').textContent = `Zakończono z błędem (kod ${result.code}${result.step ? ', ' + result.step : ''}${result.phase ? ', faza: ' + result.phase : ''}).`;
       appendLog(`Pobieranie przerwane: ${result.step || 'nieznany krok'}`, 'error');
     }
   });
 }
 
 $('#start-fetch').addEventListener('click', startFetch);
+$('#ponow-wydruki').addEventListener('click', startBuild);
 $('#stop-fetch').addEventListener('click', async () => {
   try {
     await window.planerApi.cancelFetch();

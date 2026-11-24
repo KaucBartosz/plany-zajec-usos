@@ -145,11 +145,16 @@ pierwszym startem aplikacji.
   nieokreślona do pierwszego wpisu, potem procent z `[i/n]` w logu), bieżący
   krok i log na żywo. Przycisk „Przerwij pobieranie" wywołuje `fetch:cancel`,
   który zabija bieżący proces potomny i wysyła `fetch:done` z `cancelled: true`.
-  Main proces uruchamia jako procesy potomne cały przebieg:
-  `fetch.py`, `fetch_week_pon_pt.py`, `parse.py`, `build_rooms.py`,
-  `shot_rooms.js`, `build_sheets.py`, `sheets.js`, `to_pdf.py` i `verify.py`
-  (kroki JS przez `node`, reszta przez `python`) i przesyła ich stdout przez
-  IPC. Po zakończeniu renderer przeładowuje dane. Anulowanie: zamknięcie okna
+  Main proces uruchamia jako procesy potomne fazy z `scripts/pipeline.json`:
+  faza `data` (`fetch.py --only-changed`, `fetch_week_pon_pt.py --only-changed`,
+  `parse.py`) oraz faza `build` (`build_rooms.py`, `shot_rooms.js`,
+  `build_sheets.py`, `sheets.js`, `to_pdf.py`, `print-additional.js groups`,
+  `verify.py`). Faza `build` startuje automatycznie po `data`, gdy raport
+  `html/week/changes.json` pokazuje zmiany; przycisk „Ponów wydruki" uruchamia
+  tylko `build`. IPC `fetch:phase` i `fetch:done` niosą numer fazy, listę zmian
+  oraz znacznik `noChanges`. Stan obu faz zapisywany jest w `out/stan.json`,
+  a `data.js` wczytuje go do `meta`. Po zakończeniu renderer przeładowuje dane.
+  Anulowanie: zamknięcie okna
   zabija bieżący proces potomny. Jeśli istnieje `runtime\`, procesy używają
   wbudowanych `python.exe`/`node.exe`, a `PLAYWRIGHT_BROWSERS_PATH` i
   `PLANER_NODE` wskazują na ten folder — wersja przenośna nie wymaga

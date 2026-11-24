@@ -1,0 +1,26 @@
+{
+  "phases": [
+    {
+      "id": "data",
+      "label": "Pobieranie danych",
+      "steps": [
+        { "label": "Plany semestralne i tydzień (USOS)", "script": "fetch.py", "exe": "python", "args": ["--only-changed"] },
+        { "label": "Bieżący tydzień Pon–Pt", "script": "fetch_week_pon_pt.py", "exe": "python", "args": ["--only-changed"] },
+        { "label": "Parsowanie danych", "script": "parse.py", "exe": "python", "args": [] }
+      ]
+    },
+    {
+      "id": "build",
+      "label": "Wydruki",
+      "steps": [
+        { "label": "Plansze sal", "script": "build_rooms.py", "exe": "python", "args": [] },
+        { "label": "PNG sal", "script": "shot_rooms.js", "exe": "node", "args": [] },
+        { "label": "Kartki A4", "script": "build_sheets.py", "exe": "python", "args": [] },
+        { "label": "PNG kartek A4", "script": "sheets.js", "exe": "node", "args": [] },
+        { "label": "PDF do druku", "script": "to_pdf.py", "exe": "python", "args": [] },
+        { "label": "Wydruk grup weekendowych", "script": "print-additional.js", "exe": "node", "args": ["groups"] },
+        { "label": "Kontrola jakości", "script": "verify.py", "exe": "python", "args": [] }
+      ]
+    }
+  ]
+}

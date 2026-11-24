@@ -18,26 +18,27 @@ python -c "import PIL" 2>nul || (
   python -m pip install -r requirements.txt || goto :err
 )
 
-echo.
-echo [1/8] Pobieranie planow z USOSweb...
-python scripts\fetch.py || goto :err
-echo [2/8] Parsowanie HTML -^> plan.json...
+echo [1/10] Plany semestralne i tydzień (USOS)
+python scripts\fetch.py --only-changed || goto :err
+echo [2/10] Bieżący tydzień Pon–Pt
+python scripts\fetch_week_pon_pt.py --only-changed || goto :err
+echo [3/10] Parsowanie danych
 python scripts\parse.py || goto :err
-echo [3/8] Budowa plansz sal...
+echo [4/10] Plansze sal
 python scripts\build_rooms.py || goto :err
-echo [4/8] Zrzuty PNG pojedynczych sal...
+echo [5/10] PNG sal
 node scripts\shot_rooms.js || goto :err
-echo [5/8] Kartki A4 (pomiar + pakowanie)...
+echo [6/10] Kartki A4
 python scripts\build_sheets.py || goto :err
-echo [6/8] Zrzuty kartek A4...
+echo [7/10] PNG kartek A4
 node scripts\sheets.js || goto :err
-echo [7/8] PDF do druku...
+echo [8/10] PDF do druku
 python scripts\to_pdf.py || goto :err
-echo [8/8] Wydruk grup weekendowych...
+echo [9/10] Wydruk grup weekendowych
 node scripts\print-additional.js groups || goto :err
+echo [10/10] Kontrola jakości
+python scripts\verify.py || goto :err
 
-echo.
-python scripts\verify.py
 echo.
 echo Gotowe. PDF: out\a4\pdf\
 start "" "out\a4\pdf"

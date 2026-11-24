@@ -32,6 +32,8 @@ const MANAGED = [
   'scripts/fetch.py',
   'scripts/fetch_week_pon_pt.py',
   'scripts/make_manifest.js',
+  'scripts/make_runall.js',
+  'scripts/pipeline.json',
   'scripts/parse.py',
   'scripts/print-additional.js',
   'scripts/sheets.js',
@@ -54,9 +56,11 @@ const MANAGED = [
   'aplikacja/src/shared/views.js',
   'aplikacja/test/export-template.test.js',
   'aplikacja/test/filters.test.js',
+  'aplikacja/test/pipeline.test.js',
   'aplikacja/test/update-core.test.js',
   'aplikacja/test/views.test.js',
   'tests/test_conflicts.py',
+  'tests/test_fetch_changed.py',
   'tests/test_parse.py',
 ];
 
@@ -109,9 +113,13 @@ function main() {
   console.log(`API.json: ${MANAGED.length} plików managed, ${LOCAL.length} plików local.`);
 }
 
-try {
-  main();
-} catch (error) {
-  console.error('[BLAD] ' + error.message);
-  process.exitCode = 1;
+if (require.main === module) {
+  try {
+    main();
+  } catch (error) {
+    console.error('[BLAD] ' + error.message);
+    process.exitCode = 1;
+  }
 }
+
+module.exports = { MANAGED, LOCAL };

@@ -53,6 +53,7 @@ function loadAll(rootDir) {
   const semester = flatten(semesterPlan, 'semester');
   const week = flatten(weekPlan, 'week');
   const weekPonPt = flatten(weekPonPtPlan, 'week');
+  const status = readJson(path.join(root, 'out', 'stan.json')) || {};
 
   return {
     entries: [...semester.entries, ...week.entries, ...weekPonPt.entries],
@@ -65,6 +66,9 @@ function loadAll(rootDir) {
       weekPonPtCount: weekPonPt.entries.length,
       faculty: configValue('FACULTY'),
       semester: configValue('SEMESTER'),
+      dataFetchedAt: status.dataFetchedAt || null,
+      buildFinishedAt: status.buildFinishedAt || null,
+      changes: status.changes || [],
     },
   };
 }
