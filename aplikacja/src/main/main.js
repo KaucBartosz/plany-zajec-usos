@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
-const { app, BrowserWindow, ipcMain, shell } = require('electron');
+const { app, BrowserWindow, dialog, ipcMain, shell } = require('electron');
 const { loadAll } = require('../shared/data');
 const { phaseStatusPatch } = require('../shared/status');
 const { exportPlan } = require('./export');
@@ -31,6 +31,19 @@ const PIPELINE = JSON.parse(fs.readFileSync(
   path.join(DATA_ROOT, 'scripts', 'pipeline.json'), 'utf8'));
 const CHANGES_FILE = path.join(DATA_ROOT, 'html', 'week', 'changes.json');
 const STATUS_FILE = path.join(DATA_ROOT, 'out', 'stan.json');
+
+// Wydruki dodatkowe: ten sam skrypt co faza „Wydruki”, ale plik trafia tam,
+// gdzie użytkownik wskaże w oknie zapisu.
+const PRINTS = {
+  groups: { dir: 'grupy-weekend', name: (b) => `grupy-weekend-bud-${b}.pdf`, title: 'Wydrukuj plan weekendowy' },
+  rooms: { dir: 'sale-pon-pt', name: (b) => `sale-pon-pt-bud-${b}.pdf`, title: 'Wydrukuj plan semestralny sal' },
+};
+
+function printSource(mode) {
+  const { building } = require(path.join(DATA_ROOT, 'scripts', 'print-config'))
+    .loadConfig(path.join(DATA_ROOT, 'scripts'));
+  return path.join(DATA_ROOT, 'out', 'druk', PRINTS[mode].dir, PRINTS[mode].name(building));
+}
 
 let fetchProcess = null;
 let fetchCancelled = false;
@@ -207,6 +220,46 @@ ipcMain.handle('export:run', async (_event, payload) => {
 });
 ipcMain.handle('export:openDir', () =>
   shell.openPath(path.join(DATA_ROOT, 'out', 'eksport')));
+ipcMain.handle('print:run', async (_event, mode) => {
+  const spec = PRINTS[mode];
+  if (!spec) return { ok: false, error: 'Nieznany wydruk.' };
+  const generated = printSource(mode);
+  const { canceled, filePath } = await dialog.showSaveDialog(
+    BrowserWindow.getFocusedWindow(), {
+      title: spec.title,
+      defaultPath: path.join(app.getPath('documents'), path.basename(generated)),
+      filters: [{ name: 'PDF', extensions: ['pdf'] }],
+    });
+  if (canceled || !filePath) return { ok: false, cancelled: true };
+  const target = /\.pdf$/i.test(filePath) ? filePath : `${filePath}.pdf`;
+  return new Promise((resolve) => {
+    const child = spawn(bundled('node'),
+      [path.join(DATA_ROOT, 'scripts', 'print-additional.js'), mode],
+      { cwd: DATA_ROOT, env: childEnv() });
+    let output = '';
+    child.stdout.setEncoding('utf8');
+    child.stderr.setEncoding('utf8');
+    child.stdout.on('data', (chunk) => { output += chunk; });
+    child.stderr.on('data', (chunk) => { output += chunk; });
+    child.on('error', (error) => resolve({ ok: false, error: error.message }));
+    child.on('close', (code) => {
+      if (code !== 0) {
+        const line = output.split(/\r?\n/).find((item) => item.includes('[BLAD]'));
+        resolve({ ok: false, error: line || `Skrypt zakończył się kodem ${code}.` });
+        return;
+      }
+      try {
+        if (path.resolve(generated) !== path.resolve(target)) {
+          fs.mkdirSync(path.dirname(target), { recursive: true });
+          fs.copyFileSync(generated, target);
+        }
+        resolve({ ok: true, file: target });
+      } catch (error) {
+        resolve({ ok: false, error: error.message });
+      }
+    });
+  });
+});
 ipcMain.handle('fetch:start', (event) => {
   if (fetchProcess) return { started: false, error: 'Pobieranie już trwa.' };
   runPhases(event.sender, ['data', 'build']);

@@ -51,6 +51,17 @@
       <p id="progress-label" class="progress-label" role="status" aria-live="polite">Nie rozpoczęto.</p>
       <pre id="fetch-log" class="fetch-log"></pre>
     </section>
+
+    <section class="fetch-panel">
+      <h2>Wydruki do wybranego miejsca</h2>
+      <p class="hint">PDF-y powstają z aktualnych danych — tak samo jak w fazie wydruków.
+        Po kliknięciu wybierasz folder i nazwę pliku.</p>
+      <div class="print-actions">
+        <button type="button" id="druk-weekend">Wydrukuj plan weekendowy</button>
+        <button type="button" id="druk-sale">Wydrukuj plan semestralny sal</button>
+      </div>
+      <p id="druk-status" class="print-status" role="status" aria-live="polite"></p>
+    </section>
   </div>
 
   <div id="eksport-modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="eksport-tytul">

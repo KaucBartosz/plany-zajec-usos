@@ -835,3 +835,28 @@ $('#eksport-modal').addEventListener('click', (event) => {
   if (event.target.id === 'eksport-modal') closeExportModal();
 });
 syncPdfOptions();
+
+// --- Wydruki do wybranego miejsca ----------------------------------------
+async function printPlan(mode, button) {
+  button.disabled = true;
+  const status = $('#druk-status');
+  status.textContent = 'Generowanie PDF…';
+  try {
+    const result = await window.planerApi.printPlan(mode);
+    if (result.cancelled) {
+      status.textContent = 'Anulowano wybór miejsca zapisu.';
+      return;
+    }
+    if (!result.ok) throw new Error(result.error || 'Wydruk nie udał się.');
+    status.textContent = `Zapisano: ${result.file}`;
+  } catch (error) {
+    status.textContent = `Błąd wydruku: ${error.message}`;
+  } finally {
+    button.disabled = false;
+  }
+}
+
+$('#druk-weekend').addEventListener('click',
+  (event) => printPlan('groups', event.currentTarget));
+$('#druk-sale').addEventListener('click',
+  (event) => printPlan('rooms', event.currentTarget));

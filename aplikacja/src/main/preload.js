@@ -6,6 +6,7 @@ contextBridge.exposeInMainWorld('planerApi', {
   loadData: () => ipcRenderer.invoke('data:load'),
   exportPlan: (payload) => ipcRenderer.invoke('export:run', payload),
   openExportDir: () => ipcRenderer.invoke('export:openDir'),
+  printPlan: (mode) => ipcRenderer.invoke('print:run', mode),
   startFetch: () => ipcRenderer.invoke('fetch:start'),
   startBuild: () => ipcRenderer.invoke('fetch:startBuild'),
   cancelFetch: () => ipcRenderer.invoke('fetch:cancel'),

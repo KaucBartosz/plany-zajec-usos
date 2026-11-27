@@ -135,6 +135,12 @@ th { font-size: 11.5px; text-transform: uppercase; color: var(--muted); }
 .progress-label { margin: 0 0 12px; color: var(--muted); }
 .fetch-log { max-height: 360px; margin: 0; padding: 12px; overflow: auto; border-radius: 5px; background: #1e2733; color: #d7dee7; font: 12px/1.5 Consolas, monospace; white-space: pre-wrap; }
 .fetch-log .err { color: #ff9d9d; }
+.print-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.print-actions button { padding: 9px 16px; border: 1px solid var(--accent); border-radius: 4px; background: #fff; color: var(--accent); cursor: pointer; font: inherit; }
+.print-actions button:hover { background: #fff5f5; }
+.print-actions button:disabled { border-color: #cbd2da; color: #9aa3ae; cursor: default; }
+.print-status { margin: 10px 0 0; color: var(--muted); font-size: 12.5px; overflow-wrap: anywhere; }
+.print-status:empty { display: none; }
 
 .export-status { min-height: 0; margin: 0 0 8px; color: var(--muted); font-size: 12.5px; }
 .export-status:empty { display: none; }
