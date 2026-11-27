@@ -1,13 +1,13 @@
 {
   "schema": 1,
-  "version": "2026.11.24-8",
-  "publishedAt": "2026-11-24T13:30:38.609Z",
+  "version": "2026.11.24-9",
+  "publishedAt": "2026-11-27T10:32:20.141Z",
   "minRuntime": {
     "python": "3.10",
     "node": "18",
     "electron": "37"
   },
-  "base": "https://raw.githubusercontent.com/KaucBartosz/plany-zajec-usos/v2026.11.24-8/",
+  "base": "https://raw.githubusercontent.com/KaucBartosz/plany-zajec-usos/v2026.11.24-9/",
   "files": [
     {
       "path": "aplikacja/package.json",
@@ -23,13 +23,13 @@
     },
     {
       "path": "aplikacja/README.md",
-      "sha256": "3eaf4d37baa3ce576d778f6eda7075e8dbea9af705a28278a428c7dda3b194c1",
-      "bytes": 5994,
+      "sha256": "a909a393e3da566e3c174f93aa0ccd62f7c8b4ea96a092dbe1b8935cfa3cacdf",
+      "bytes": 6416,
       "mode": "managed"
     },
     {
       "path": "aplikacja/src/main/app-version.json",
-      "sha256": "281884037f7a150f7e6e65d07d11e69fd727521e7bacd3df5daca0ece4b59f76",
+      "sha256": "d25dd421614a32859991e3a889118322b6da94b4922267f9f3381b08c49d661a",
       "bytes": 32,
       "mode": "managed"
     },
@@ -47,14 +47,14 @@
     },
     {
       "path": "aplikacja/src/main/main.js",
-      "sha256": "91b47e1640facf9f6c75be3529faae03bbd77be2de71799e567f43195dc52baa",
-      "bytes": 7389,
+      "sha256": "51b55f62a1c04a7612a1341790a2b414b1117a37cd0928550d6c67810bc74ee3",
+      "bytes": 9720,
       "mode": "managed"
     },
     {
       "path": "aplikacja/src/main/preload.js",
-      "sha256": "0a66f699cfa6d32d33737cc5552a1be7b67d184c8ce3f86e7a0eecaacf140d55",
-      "bytes": 786,
+      "sha256": "ecf27936c7bf631e803bd765b2b3e6068980e3caeda453755a170613173aef48",
+      "bytes": 848,
       "mode": "managed"
     },
     {
@@ -83,20 +83,20 @@
     },
     {
       "path": "aplikacja/src/renderer/app.js",
-      "sha256": "2cc238e56170796085f571b01c42dfdd16128e31b33d733a60eff1307e3c0571",
-      "bytes": 34235,
+      "sha256": "4002ce4c369c7ce2858b3a16a54a8afbe29f4406fc5d828278bccbd6ae9b5a09",
+      "bytes": 35174,
       "mode": "managed"
     },
     {
       "path": "aplikacja/src/renderer/index.html",
-      "sha256": "1ad3ac4bf480d6be7bdee8a4dd1ae73decfab9d80a48a22f5ffb8ad02bbd66b6",
-      "bytes": 4187,
+      "sha256": "9b39350f99e94c60042ea1e42fe75b7f38c9e7b55da05188a130f2a444babea1",
+      "bytes": 4523,
       "mode": "managed"
     },
     {
       "path": "aplikacja/src/renderer/styles.css",
-      "sha256": "bfdba76848d81c25bc45dfd031e03554c2fd992e3436f59b29682bd2ae13db36",
-      "bytes": 10347,
+      "sha256": "028b9f385357e592db8f903f317ef0b0998e42896edf47cb2572811f21473dbd",
+      "bytes": 11181,
       "mode": "managed"
     },
     {
@@ -364,5 +364,5 @@
       "mode": "local"
     }
   ],
-  "sig": "ip0jOwV8NB9GkAih9EpGp85LrFQF/smROK6RB4qej2Jc1TSTyMHlsAZim9VLARCw2EijCrf57w8prlh9dcp8Dw=="
+  "sig": "Q82HNrj4X87vqD1qHeOngI+zsakiTB5yDngMo8uhFpM9ZSEadKdp0ECurSJNs3x11Kfz2dvYh4yzgc3LuPWPDA=="
 }
