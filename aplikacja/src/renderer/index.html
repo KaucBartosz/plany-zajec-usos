@@ -16,7 +16,12 @@
       <button type="button" data-tab="plan" class="active">Plan</button>
       <button type="button" data-tab="fetch">Pobieranie danych</button>
     </nav>
-    <button type="button" id="eksport" class="export-top">Eksport PDF/PNG</button>
+    <div class="topbar-actions">
+      <button type="button" id="druk-weekend" class="top-action">Wydrukuj plan weekendowy</button>
+      <button type="button" id="druk-sale" class="top-action">Wydrukuj plan semestralny sal</button>
+      <button type="button" id="eksport" class="export-top">Eksport PDF/PNG</button>
+      <span id="druk-status" class="druk-status" role="status" aria-live="polite"></span>
+    </div>
   </header>
 
   <div id="page-plan" class="page active">
@@ -50,17 +55,6 @@
       <div id="progress-track" class="progress-track" role="progressbar" aria-label="Postęp pobierania" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="progress-bar" class="progress-bar"></div></div>
       <p id="progress-label" class="progress-label" role="status" aria-live="polite">Nie rozpoczęto.</p>
       <pre id="fetch-log" class="fetch-log"></pre>
-    </section>
-
-    <section class="fetch-panel">
-      <h2>Wydruki do wybranego miejsca</h2>
-      <p class="hint">PDF-y powstają z aktualnych danych — tak samo jak w fazie wydruków.
-        Po kliknięciu wybierasz folder i nazwę pliku.</p>
-      <div class="print-actions">
-        <button type="button" id="druk-weekend">Wydrukuj plan weekendowy</button>
-        <button type="button" id="druk-sale">Wydrukuj plan semestralny sal</button>
-      </div>
-      <p id="druk-status" class="print-status" role="status" aria-live="polite"></p>
     </section>
   </div>
 

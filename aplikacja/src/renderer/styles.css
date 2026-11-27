@@ -135,18 +135,22 @@ th { font-size: 11.5px; text-transform: uppercase; color: var(--muted); }
 .progress-label { margin: 0 0 12px; color: var(--muted); }
 .fetch-log { max-height: 360px; margin: 0; padding: 12px; overflow: auto; border-radius: 5px; background: #1e2733; color: #d7dee7; font: 12px/1.5 Consolas, monospace; white-space: pre-wrap; }
 .fetch-log .err { color: #ff9d9d; }
-.print-actions { display: flex; flex-wrap: wrap; gap: 8px; }
-.print-actions button { padding: 9px 16px; border: 1px solid var(--accent); border-radius: 4px; background: #fff; color: var(--accent); cursor: pointer; font: inherit; }
-.print-actions button:hover { background: #fff5f5; }
-.print-actions button:disabled { border-color: #cbd2da; color: #9aa3ae; cursor: default; }
-.print-status { margin: 10px 0 0; color: var(--muted); font-size: 12.5px; overflow-wrap: anywhere; }
-.print-status:empty { display: none; }
+.topbar-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.top-action { padding: 8px 14px; border: 1px solid #5b6b7d; border-radius: 4px; background: transparent; color: #fff; cursor: pointer; font: inherit; white-space: nowrap; }
+.top-action:hover { background: #324256; }
+.top-action:disabled { border-color: #5b6b7d; color: #9aa3ae; cursor: default; }
+.druk-status { position: fixed; top: 64px; right: 20px; z-index: 30; max-width: 420px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 4px; background: var(--panel); box-shadow: 0 4px 12px rgba(0,0,0,.15); color: var(--muted); font-size: 12.5px; overflow-wrap: anywhere; }
+.druk-status:empty { display: none; }
+@media (max-width: 1200px) {
+  .topbar { gap: 8px; padding: 10px 12px; }
+  .top-action, .export-top { padding: 7px 9px; font-size: 12.5px; }
+}
 
 .export-status { min-height: 0; margin: 0 0 8px; color: var(--muted); font-size: 12.5px; }
 .export-status:empty { display: none; }
 .export-status button { margin-left: 10px; padding: 3px 8px; border: 1px solid var(--line); border-radius: 3px; background: #fff; cursor: pointer; }
 
-.export-top { margin-left: auto; padding: 8px 14px; border: 1px solid #5b6b7d; border-radius: 4px; background: var(--accent); color: #fff; cursor: pointer; font: inherit; }
+.export-top { padding: 8px 14px; border: 1px solid #5b6b7d; border-radius: 4px; background: var(--accent); color: #fff; cursor: pointer; font: inherit; }
 .export-top:hover { background: #94202c; }
 .modal { position: fixed; inset: 0; z-index: 20; display: flex; align-items: center; justify-content: center; background: rgba(20, 27, 36, .55); }
 .modal[hidden] { display: none; }

@@ -87,11 +87,11 @@ folder" otwiera katalog z wynikami.
 
 ## Wydruki do wybranego miejsca
 
-Zakładka „Pobieranie danych” ma na dole dwa przyciski: „Wydrukuj plan
-weekendowy” i „Wydrukuj plan semestralny sal”. Uruchamiają te same skrypty co
-faza wydruków (`scripts/print-additional.js`), ale przed startem pytania o
-folder i nazwę pliku. Powstaje PDF odpowiednio z osobną kartką dla każdej grupy
-i specjalności (tydzień) albo z planami sal Pon–Pt.
+W prawym górnym rogu, obok „Eksport PDF/PNG”, są dwa przyciski:
+„Wydrukuj plan weekendowy” i „Wydrukuj plan semestralny sal”. Uruchamiają te
+same skrypty co faza wydruków (`scripts/print-additional.js`), ale przed
+startem pytania o folder i nazwę pliku. Powstaje PDF odpowiednio z osobną
+kartką dla każdej grupy i specjalności (tydzień) albo z planami sal Pon–Pt.
 
 ## Pobieranie danych
 

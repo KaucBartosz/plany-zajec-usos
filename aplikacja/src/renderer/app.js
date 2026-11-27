@@ -841,6 +841,7 @@ async function printPlan(mode, button) {
   button.disabled = true;
   const status = $('#druk-status');
   status.textContent = 'Generowanie PDF…';
+  status.title = '';
   try {
     const result = await window.planerApi.printPlan(mode);
     if (result.cancelled) {
@@ -848,7 +849,8 @@ async function printPlan(mode, button) {
       return;
     }
     if (!result.ok) throw new Error(result.error || 'Wydruk nie udał się.');
-    status.textContent = `Zapisano: ${result.file}`;
+    status.textContent = `Zapisano: ${result.file.split(/[\\/]/).pop()}`;
+    status.title = result.file;
   } catch (error) {
     status.textContent = `Błąd wydruku: ${error.message}`;
   } finally {
